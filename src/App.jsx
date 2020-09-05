@@ -1,11 +1,19 @@
 import React from 'react';
 
-import GlobalStyle from './styles/global.styles';
+import './app.css';
+
+import { Switch, Route } from 'react-router-dom';
+
+import Header from './components/header/Header.component';
+import HomePage from './pages/homepage/Home.page';
 
 function App() {
   return (
     <div className='App'>
-      <GlobalStyle />
+      <Header></Header>
+      <Switch>
+        <Route path='/' component={HomePage} />
+      </Switch>
     </div>
   );
 }
