@@ -1,0 +1,15 @@
+.home-page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  align-items: flex-start;
+
+  .home-container {
+    width: 100%;
+    max-width: 1300px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
