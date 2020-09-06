@@ -18,16 +18,16 @@ const sections = [
     linkUrl: 'shop/sneakers',
   },
   {
-    title: 'womens',
-    imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
-    id: 4,
-    linkUrl: 'shop/womens',
-  },
-  {
     title: 'mens',
     imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
     id: 5,
     linkUrl: 'shop/mens',
+  },
+  {
+    title: 'womens',
+    imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
+    id: 4,
+    linkUrl: 'shop/womens',
   },
 ];
 
