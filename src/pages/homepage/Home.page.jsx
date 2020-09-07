@@ -6,16 +6,14 @@ import MenuItem from '../../components/menu-item/MenuItem.component';
 
 import sections from './sections';
 
-const HomePage = () => {
-  return (
-    <main className='home-page'>
-      <div className='home-container'>
-        {sections.map(({ id, ...props }) => (
-          <MenuItem key={id} {...props} />
-        ))}
-      </div>
-    </main>
-  );
-};
+const HomePage = () => (
+  <main className="home-page">
+    <div className="home-container">
+      {sections.map(({ id, ...otherProps }) => (
+        <MenuItem key={id} {...otherProps} />
+      ))}
+    </div>
+  </main>
+);
 
 export default HomePage;

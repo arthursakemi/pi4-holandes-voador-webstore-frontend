@@ -9,10 +9,10 @@ import HomePage from './pages/homepage/Home.page';
 
 function App() {
   return (
-    <div className='App'>
-      <Header></Header>
+    <div className="App">
+      <Header />
       <Switch>
-        <Route path='/' component={HomePage} />
+        <Route path="/" component={HomePage} />
       </Switch>
     </div>
   );
