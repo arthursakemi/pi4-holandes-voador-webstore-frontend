@@ -13,4 +13,11 @@ const formFields = [
   { name: 'palavras_chave', label: 'Palavras Chave', type: 'text', multiline: true },
 ];
 
+export const imgList = [
+  'https://i.imgur.com/18eoHmN.jpg',
+  'https://i.imgur.com/rZkoh5m.jpg',
+  'https://i.imgur.com/EaScotW.jpg',
+  'https://i.imgur.com/dKYXBJV.jpg',
+];
+
 export default formFields;

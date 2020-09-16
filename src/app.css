@@ -9,6 +9,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow: auto;
 
   background: #f5f5f5;
   font-size: 14px;
