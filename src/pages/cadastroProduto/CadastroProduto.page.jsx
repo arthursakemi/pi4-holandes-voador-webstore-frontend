@@ -3,35 +3,59 @@ import Axios from 'axios';
 
 import './cadastroProduto.styles.scss';
 
+import { isEqual } from 'lodash';
+
+import { TextField, MenuItem, Button } from '@material-ui/core';
+
 import formFields from './fields';
 import UploadGallery from '../../components/upload-gallery/UploadGallery.component';
-import { TextField, MenuItem, Button, InputAdornment, IconButton } from '@material-ui/core';
-import { Add, HighlightOff } from '@material-ui/icons';
+import ListaPerguntas from '../../components/lista-perguntas/ListaPerguntas.component';
+import DoneOverlay from '../../components/done-overlay/DoneOverlay.component';
+import LoadingOverlay from '../../components/loading-overlay/LoadingOverlay.component';
 
 const initialDataState = {
   nome: '',
   marca: '',
   categoria: '',
-  preco: '',
+  valor: '',
   descricao: '',
-  palavras_chave: '',
-  perguntas: [{ pergunta: '', resposta: '' }],
+  palavrasChave: '',
+  perguntas: [],
   imagens: [],
 };
 
 const CadastroProduto = () => {
-  const [loading, setLoading] = useState(false);
+  const [done, setDone] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [overlayMsg, setOverlayMsg] = useState('');
+  const [success, setSuccess] = useState(true);
+  const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [formData, setFormData] = useState(initialDataState);
+  const [newPergunta, setNewPergunta] = useState({ pergunta: '', resposta: '' });
   const [image, setImage] = useState({});
-
-  const handleAddQuestion = (e) => {
-    e.preventDefault();
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('foi');
+    const url = 'https://dutchman-backend-prod.herokuapp.com/produto';
+    setSubmitting(true);
+    Axios.post(url, formData)
+      .then((res) => {
+        setSubmitting(false);
+        setSuccess(true);
+        setOverlayMsg('Produto cadastrado com sucesso!');
+        resetForm();
+        console.log(res);
+      })
+      .catch((e) => {
+        console.log(e);
+        setSuccess(false);
+        setOverlayMsg('Falha ao cadastrar produto!');
+        setDone(true);
+      })
+      .finally(() => {
+        setDone(true);
+      });
   };
 
   const handleChange = (e) => {
@@ -39,18 +63,37 @@ const CadastroProduto = () => {
     setFormData((state) => ({ ...state, [name]: value }));
   };
 
+  const handleChangeQuestion = (e) => {
+    const { value, name } = e.target;
+    setNewPergunta((state) => ({ ...state, [name]: value }));
+  };
+
   const handleImgSelection = (e) => {
     const { files } = e.target;
     setImage(files);
   };
 
-  const uploadImage = async () => {
-    setLoading(true);
-    if (image.length === 0) {
-      setLoading(false);
+  const handleAddQuestion = (e) => {
+    if (newPergunta.pergunta.trim() === '' || newPergunta.resposta.trim() === '') {
+      alert('Preencha ambos os campos antes de adicionar.');
       return;
     }
 
+    setFormData((state) => ({ ...state, perguntas: [...state.perguntas, newPergunta] }));
+    setNewPergunta({ pergunta: '', resposta: '' });
+  };
+
+  const handleDeleteQuestion = (e) => {
+    const index = Number(e.currentTarget.name);
+    const perguntasFiltradas = formData.perguntas.filter((pergunta, idx) => index !== idx);
+    setFormData((state) => ({ ...state, perguntas: perguntasFiltradas }));
+  };
+
+  const uploadImage = async () => {
+    if (isEqual(image, {})) {
+      return;
+    }
+    setUploading(true);
     const data = new FormData();
     data.append('image', image[0]);
 
@@ -70,12 +113,12 @@ const CadastroProduto = () => {
       .then((res) => {
         const src = res.data.data.link;
         console.log(res.data);
-        setFormData((state) => ({ ...state, imagens: [...state.imagens, src] }));
-        setImage([]);
+        setFormData((state) => ({ ...state, imagens: [...state.imagens, { imagem: src }] }));
+        setImage({});
       })
       .catch((e) => console.log(e))
       .finally(() => {
-        setLoading(false);
+        setUploading(false);
       });
   };
 
@@ -106,7 +149,7 @@ const CadastroProduto = () => {
       <form onSubmit={handleSubmit}>
         <div className="form-container">
           <UploadGallery
-            loading={loading}
+            loading={uploading}
             progress={progress}
             imgList={formData.imagens}
             handleClick={handleImageDelete}
@@ -126,42 +169,14 @@ const CadastroProduto = () => {
               {child ? child.map((item) => <MenuItem value={item}>{item}</MenuItem>) : ''}
             </TextField>
           ))}
-          <div className="perguntas">
-            <h3>FAQ</h3>
-
-            {formData.perguntas.map(({ pergunta, resposta }, index) => (
-              <div className="faq-group">
-                <div className="input-group">
-                  <TextField
-                    value={pergunta}
-                    name="pergunta"
-                    fullWidth
-                    InputProps={{
-                      startAdornment: <InputAdornment position="start">P:</InputAdornment>,
-                    }}
-                  />
-                  <TextField
-                    value={resposta}
-                    name="resposta"
-                    fullWidth
-                    InputProps={{
-                      startAdornment: <InputAdornment position="start">R:</InputAdornment>,
-                    }}
-                  />
-                </div>
-                <div className="flex-box">
-                  <IconButton className="faq-delete-btn" name={index} type="button" color="secondary">
-                    <HighlightOff />
-                  </IconButton>
-                </div>
-              </div>
-            ))}
-
-            <IconButton className="add-faq-btn">
-              <Add />
-            </IconButton>
-          </div>
-
+          <ListaPerguntas
+            listaPerguntas={formData.perguntas}
+            pergunta={newPergunta.pergunta}
+            resposta={newPergunta.resposta}
+            handleChange={handleChangeQuestion}
+            handleAdd={handleAddQuestion}
+            handleRemove={handleDeleteQuestion}
+          />
           <div className="form-group">
             <Button type="button" onClick={resetForm} variant="contained" fullWidth>
               Cancelar
@@ -172,6 +187,8 @@ const CadastroProduto = () => {
           </div>
         </div>
       </form>
+      {done ? <DoneOverlay msg={overlayMsg} success={success} setDone={setDone} /> : ''}
+      {submitting ? <LoadingOverlay loadingText={'Enviando...'} /> : ''}
     </main>
   );
 };

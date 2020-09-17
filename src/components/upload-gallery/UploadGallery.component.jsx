@@ -17,7 +17,7 @@ const UploadGallery = ({ imgList, handleClick, loading, progress, handleImgSelec
             </IconButton>
           </label>
         </div>
-        Você ainda não selecionou nenhuma imagem.
+        Nenhuma imagem selecionada.
       </div>
     );
   }
@@ -25,7 +25,7 @@ const UploadGallery = ({ imgList, handleClick, loading, progress, handleImgSelec
   return (
     <div className="upload-gallery gallery">
       {imgList.map((imagem, index) => (
-        <div key={index} className="uploaded-img" style={{ backgroundImage: `url(${imagem})` }}>
+        <div key={index} className="uploaded-img" style={{ backgroundImage: `url(${imagem.imagem})` }}>
           <IconButton className="delete-btn" name={index} type="button" onClick={handleClick} color="inherit">
             <HighlightOff />
           </IconButton>
