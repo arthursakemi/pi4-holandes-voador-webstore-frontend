@@ -1,0 +1,43 @@
+.pagina-cadastro {
+  padding: 25px;
+}
+
+.form-title {
+  text-align: center;
+}
+
+.form-container {
+  margin: 0 auto;
+  max-width: 500px;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  margin: 10px 0;
+  gap: 20px;
+}
+
+.img-container {
+  display: flex;
+  gap: 20px;
+}
+
+.uploaded-img {
+  width: 100px;
+}
+
+.flex-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-group {
+  flex-grow: 1;
+}

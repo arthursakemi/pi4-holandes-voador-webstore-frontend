@@ -3,7 +3,7 @@
   "arrowParens": "always",
   "trailingComma": "es5",
   "semi": true,
-  "printWidth": 80,
+  "printWidth": 140,
   "tabWidth": 2,
   "bracketSpacing": true
 }

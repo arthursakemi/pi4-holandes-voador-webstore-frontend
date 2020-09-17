@@ -7,9 +7,9 @@
 .App {
   width: 100vw;
   height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
 
   background: #f5f5f5;
   font-size: 14px;
