@@ -19,6 +19,10 @@ const initialDataState = {
   categoria: '',
   valor: '',
   descricao: '',
+  p: 0,
+  m: 0,
+  g: 0,
+  unico: 0,
   palavrasChave: '',
   perguntas: [],
   imagens: [],
@@ -169,6 +173,15 @@ const CadastroProduto = () => {
               {child ? child.map((item) => <MenuItem value={item}>{item}</MenuItem>) : ''}
             </TextField>
           ))}
+          <div className="estoque-container">
+            <h4>Estoque</h4>
+            <div className="estoque-input-container">
+              <TextField label="p" name="p" onChange={handleChange} onBlur={trimWhiteSpace} type="number" />
+              <TextField label="m" name="m" onChange={handleChange} onBlur={trimWhiteSpace} type="number" />
+              <TextField label="g" name="g" onChange={handleChange} onBlur={trimWhiteSpace} type="number" />
+              <TextField label="unico" name="unico" onChange={handleChange} onBlur={trimWhiteSpace} type="number" />
+            </div>
+          </div>
           <ListaPerguntas
             listaPerguntas={formData.perguntas}
             pergunta={newPergunta.pergunta}
