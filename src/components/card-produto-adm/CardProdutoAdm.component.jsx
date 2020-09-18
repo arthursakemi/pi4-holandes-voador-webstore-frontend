@@ -8,7 +8,6 @@ import Alert from '../alert/Alert.component';
 import { Card, CardActionArea, CardActions, CardMedia, CardContent, Typography, Button } from '@material-ui/core';
 import Carousel from 'react-material-ui-carousel';
 import EstoqueAlert from '../estoque-alert/EstoqueAlert.component';
-import { useHistory } from 'react-router-dom';
 
 const ProdutoSimples = ({ produto, handleDelete, setReload }) => {
   const [id] = useState(produto.id);
