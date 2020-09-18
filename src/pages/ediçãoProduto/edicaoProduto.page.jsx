@@ -38,8 +38,6 @@ const EdicaoProduto = () => {
     return (
         <main className="edicao-page">
             
-            {done ? <DoneOverlay msg={overlayMsg} success={success} setDone={setDone} /> : ''}
-            {loading ? <LoadingOverlay loadingText={loadingMsg} /> : ''}
         </main>
       );
 }
