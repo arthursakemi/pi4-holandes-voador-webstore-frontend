@@ -7,7 +7,7 @@ import Header from './components/header/Header.component';
 import HomePage from './pages/homepage/Home.page';
 import CadastroProduto from './pages/cadastroProduto/CadastroProduto.page';
 import GaleriaProdutos from './pages/galeriaProdutos/GaleriaProdutos.page';
-import EdicaoProduto from './pages/ediçãoProduto/EdicaoProduto.page';
+import EdicaoProduto from './pages/edicaoProduto/EdicaoProduto.page';
 
 function App() {
   return (
