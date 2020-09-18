@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
 
 import './galeriaProdutos.styles.scss';
 
+import { Card, CardActionArea, IconButton } from '@material-ui/core';
+
 import DoneOverlay from '../../components/done-overlay/DoneOverlay.component';
 import LoadingOverlay from '../../components/loading-overlay/LoadingOverlay.component';
 import ProdutoCard from '../../components/card-produto-adm/CardProdutoAdm.component';
+import { AddCircleOutline } from '@material-ui/icons';
 
 const GaleriaProdutos = () => {
   const [produtos, setProdutos] = useState([]);
@@ -41,12 +45,21 @@ const GaleriaProdutos = () => {
       });
   };
 
+  const history = useHistory();
+
   useEffect(() => {
     getAllProdutos();
   }, [reload]);
 
   return (
     <main className="galeria-page">
+      <Card>
+        <CardActionArea className="add-product" onClick={() => history.push(`/produtos/cadastro`)}>
+          <IconButton className="add-product-icon" >
+            <AddCircleOutline />
+          </IconButton>
+        </CardActionArea>
+      </Card>
       {produtos.map((produto, index) => (
         <ProdutoCard key={index} produto={produto} handleDelete={handleDelete} setReload={setReload} />
       ))}
