@@ -1,0 +1,38 @@
+.detalhe-page {
+  padding: 20px;
+  .produto-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    .perguntas-container {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid darkgray;
+    }
+  }
+  .page-title {
+    text-align: center;
+    color: #f5f5f5;
+    background-color: #282a36;
+  }
+
+  .carousel {
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+  }
+}
+.detalhe-card-image {
+  height: 400px;
+}
+
+.texto-detalhe {
+  width: 100%;
+}
+
+.texto-detalhe.pergunta {
+  margin-top: 5px;
+}
