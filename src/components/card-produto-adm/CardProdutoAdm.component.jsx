@@ -38,7 +38,7 @@ const ProdutoSimples = ({ produto, handleDelete, setReload }) => {
   };
 
   const redirectEditProduto = () => {
-    history.push(`/produtos/editar/${id}`)
+    history.push(`/produtos/editar/${id}`);
   };
 
   return (
