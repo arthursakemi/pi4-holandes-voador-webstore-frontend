@@ -38,7 +38,7 @@ const EstoqueAlert = ({ open, handleClose, idProduto, disponivel, setReload }) =
     <Dialog open={open} onClose={onClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
       <DialogTitle id="alert-dialog-title">Alterar Estoque</DialogTitle>
       <form onSubmit={handleSubmit}>
-        <DialogContent className="form-container">
+        <DialogContent className="estoque-form-container">
           <TextField label="p" name="p" value={estoque.p} type="number" onChange={handleChange} required />
           <TextField label="m" name="m" value={estoque.m} type="number" onChange={handleChange} required />
           <TextField label="g" name="g" value={estoque.g} type="number" onChange={handleChange} required />

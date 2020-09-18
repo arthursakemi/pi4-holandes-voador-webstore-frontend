@@ -8,20 +8,27 @@ import Alert from '../alert/Alert.component';
 import { Card, CardActionArea, CardActions, CardMedia, CardContent, Typography, Button } from '@material-ui/core';
 import Carousel from 'react-material-ui-carousel';
 import EstoqueAlert from '../estoque-alert/EstoqueAlert.component';
+import { useHistory } from 'react-router-dom';
 
 const ProdutoSimples = ({ produto, handleDelete, setReload }) => {
   const [id] = useState(produto.id);
   const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
   const [openEstoque, setOpenEstoque] = useState(false);
+  const history = useHistory();
 
   const history = useHistory();
 
   const handleEstoqueClick = () => {
+    console.log(produto);
     setOpenEstoque(true);
   };
 
   const closeEstoque = () => {
     setOpenEstoque(false);
+  };
+
+  const handleProductClick = () => {
+    history.push(`/produtos/${id}`);
   };
 
   const handleConfirmDelete = () => {
@@ -44,10 +51,10 @@ const ProdutoSimples = ({ produto, handleDelete, setReload }) => {
   return (
     <>
       <Card>
-        <CardActionArea>
+        <CardActionArea onClick={handleProductClick}>
           <Carousel>
             {produto.imagens.map(({ imagem }, index) => (
-              <CardMedia key={index} className="card-image" image={imagem} title={produto.nome} interval="2000" />
+              <CardMedia key={index} className="card-image" image={imagem} title={produto.nome} />
             ))}
           </Carousel>
           <CardContent>
