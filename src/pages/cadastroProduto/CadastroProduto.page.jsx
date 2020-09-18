@@ -170,7 +170,13 @@ const CadastroProduto = () => {
               onBlur={trimWhiteSpace}
               fullWidth
             >
-              {child ? child.map((item) => <MenuItem value={item}>{item}</MenuItem>) : ''}
+              {child
+                ? child.map((item, index) => (
+                    <MenuItem key={index} value={item}>
+                      {item}
+                    </MenuItem>
+                  ))
+                : ''}
             </TextField>
           ))}
           <div className="estoque-container">

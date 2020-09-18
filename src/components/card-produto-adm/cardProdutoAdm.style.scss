@@ -1,0 +1,20 @@
+.card-image {
+  height: 200px;
+}
+
+.expand-button {
+  justify-self: flex-end;
+  transform: rotate(0deg);
+  transition: transform 0.2s;
+
+  &.expanded {
+    transform: rotate(180deg);
+    transition: transform 0.2s;
+  }
+}
+
+.action-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
