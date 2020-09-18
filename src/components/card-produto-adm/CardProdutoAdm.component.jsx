@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import './cardProdutoAdm.style.scss';
 
@@ -12,6 +13,8 @@ const ProdutoSimples = ({ produto, handleDelete, setReload }) => {
   const [id] = useState(produto.id);
   const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
   const [openEstoque, setOpenEstoque] = useState(false);
+
+  const history = useHistory();
 
   const handleEstoqueClick = () => {
     setOpenEstoque(true);
@@ -32,6 +35,10 @@ const ProdutoSimples = ({ produto, handleDelete, setReload }) => {
 
   const handleCancel = () => {
     setOpenDeleteAlert(false);
+  };
+
+  const redirectEditProduto = () => {
+    history.push(`/produtos/editar/${id}`)
   };
 
   return (
@@ -57,7 +64,7 @@ const ProdutoSimples = ({ produto, handleDelete, setReload }) => {
             <Button type="button" onClick={handleEstoqueClick} variant="contained" color="primary">
               Estoque
             </Button>
-            <Button type="button" variant="contained" color="primary">
+            <Button type="button" onClick={redirectEditProduto} variant="contained" color="primary">
               Editar
             </Button>
             <Button type="button" onClick={handleDeleteClick} variant="contained" color="secondary">
