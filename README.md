@@ -2,18 +2,19 @@
 
 ## Sprint 1
 
-- [ ] Cadastrar produto
+- [x] Cadastrar produto
   - [x] Armazenamento no banco de dados
   - [x] Palavras chave
   - [x] Preço e estoque
   - [x] Imagens
-  - [ ] Q&A
+  - [x] Q&A
 - [ ] Pagina de vizualização individual dos produtos cadastrados
-  - [ ] Imagens no carrossel
+  - [x] Imagens no carrossel
   - [ ] Q&A
-- [ ] Pagina de vizualização de todos os produtos cadastrados
-  - [ ] Listagem de todos os produtos
-  - [ ] Botões de atualização, exclusão e visualização
+- [x] Pagina de vizualização de todos os produtos cadastrados
+  - [x] Listagem de todos os produtos
+  - [x] Botões de atualização, exclusão e visualização
+  - [x] Botão de criação de novo produto
 - [x] Edição de produto
   - [x] Atualização no banco
 - [x] Exclusão de produto
