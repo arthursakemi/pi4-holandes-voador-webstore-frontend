@@ -15,8 +15,6 @@ const ProdutoSimples = ({ produto, handleDelete, setReload }) => {
   const [openEstoque, setOpenEstoque] = useState(false);
   const history = useHistory();
 
-  const history = useHistory();
-
   const handleEstoqueClick = () => {
     console.log(produto);
     setOpenEstoque(true);
