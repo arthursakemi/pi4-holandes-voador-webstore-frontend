@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 
 import './detalheProduto.style.scss';
 
-import { Card, CardMedia, Paper, Typography, CardActionArea, CardContent } from '@material-ui/core';
+import { CardMedia, Paper, Typography } from '@material-ui/core';
 import Carousel from 'react-material-ui-carousel';
 
 const initialDataState = {
@@ -24,9 +24,8 @@ const initialDataState = {
 };
 
 const DetalheProduto = () => {
-  const [id, setId] = useState(useParams().id);
+  const [id] = useState(useParams().id);
   const [produto, setProduto] = useState(initialDataState);
-  const [imagens, setImagens] = useState([]);
 
   useEffect(() => {
     const url = `https://dutchman-backend-prod.herokuapp.com/produto/${id}`;
