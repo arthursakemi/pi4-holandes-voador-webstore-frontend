@@ -12,7 +12,7 @@ import ProdutoCard from '../../components/card-produto-adm/CardProdutoAdm.compon
 import { Add } from '@material-ui/icons';
 
 const GaleriaProdutos = () => {
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [produtos, setProdutos] = useState([]);
   const [done, setDone] = useState(false);
   const [success, setSuccess] = useState(true);
