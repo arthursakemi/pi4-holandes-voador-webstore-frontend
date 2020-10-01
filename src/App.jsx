@@ -10,7 +10,6 @@ import GaleriaProdutos from './pages/galeriaProdutos/GaleriaProdutos.page';
 import DetalheProduto from './pages/detalhe-produto/DetalheProduto.page';
 import EdicaoProduto from './pages/edicaoProduto/EdicaoProduto.page';
 
-
 function App() {
   return (
     <div className="App">
