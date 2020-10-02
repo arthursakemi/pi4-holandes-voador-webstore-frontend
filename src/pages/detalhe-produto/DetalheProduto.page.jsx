@@ -52,31 +52,33 @@ const DetalheProduto = () => {
         ) : (
           ''
         )}
-        <Typography className="texto-detalhe" variant="h4" component="h2">
-          {produto.nome}
-        </Typography>
-        <Typography className="texto-detalhe" gutterBottom variant="h6" component="p">
-          {produto.marca}
-        </Typography>
-        <Typography className="texto-detalhe" gutterBottom variant="h5" component="p">
-          {`R$: ${produto.valor.toFixed(2)}`}
-        </Typography>
-        <Typography className="texto-detalhe" variant="h5" component="p">
-          Estoque:
-        </Typography>
-        <Typography className="texto-detalhe" gutterBottom component="p">
-          {`P: ${produto.p}  M: ${produto.m}  G: ${produto.g} Unico: ${produto.unico} `}
-        </Typography>
-        <Typography className="texto-detalhe" variant="h5" component="p">
-          Descrição:
-        </Typography>
-        <Typography className="texto-detalhe" gutterBottom component="p">
-          {`R$: ${produto.descricao}`}
-        </Typography>
-        <Typography className="texto-detalhe pergunta" variant="h5" component="p">
-          Perguntas:
-        </Typography>
+        <div className="produto-info">
+          <Typography className="texto-detalhe" variant="h4" component="h2">
+            {produto.nome}
+          </Typography>
+          <Typography className="texto-detalhe" gutterBottom variant="h6" component="p">
+            {produto.marca}
+          </Typography>
+          <Typography className="texto-detalhe" gutterBottom variant="h5" component="p">
+            {`R$: ${produto.valor.toFixed(2)}`}
+          </Typography>
+          <Typography className="texto-detalhe" variant="h5" component="p">
+            Estoque:
+          </Typography>
+          <Typography className="texto-detalhe" gutterBottom component="p">
+            {`P: ${produto.p}  M: ${produto.m}  G: ${produto.g} Unico: ${produto.unico} `}
+          </Typography>
+          <Typography className="texto-detalhe" variant="h5" component="p">
+            Descrição:
+          </Typography>
+          <Typography className="texto-detalhe" gutterBottom component="p">
+            {`R$: ${produto.descricao}`}
+          </Typography>
+        </div>
         <div className="perguntas-container">
+          <Typography className="texto-detalhe pergunta" variant="h5" component="p">
+            Perguntas:
+          </Typography>
           {produto.perguntas.map(({ pergunta, resposta }) => (
             <>
               <Typography className="texto-detalhe" gutterBottom variant="h6" component="p">
