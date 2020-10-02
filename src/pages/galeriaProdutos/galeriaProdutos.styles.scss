@@ -1,5 +1,6 @@
 .galeria-page {
   padding: 20px;
+  width: 80%;
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -19,5 +20,11 @@
   .add-product-icon {
     font-size: 80px;
     margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .galeria-page {
+    width: 100%;
   }
 }
