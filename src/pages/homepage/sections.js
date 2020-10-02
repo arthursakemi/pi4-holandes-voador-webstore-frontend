@@ -1,7 +1,7 @@
 const sections = [
   {
     title: 'Todos os Produtos',
-    imageUrl: 'https://www.qualitylav.com.br/wp-content/uploads/2018/10/20180925_Moda-Cada-Roupa-em-seu-cabide.jpg',
+    imageUrl: 'https://i.imgur.com/sXPsLMs.jpg',
     id: 1,
     linkUrl: 'produtos',
   },
