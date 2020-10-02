@@ -1,12 +1,21 @@
 .detalhe-page {
   padding: 20px;
+  width: 100%;
+  max-width: 1000px;
+
   .produto-container {
     padding: 20px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    gap: 40px;
+
+    .produto-info {
+      flex-grow: 1;
+    }
+
     .perguntas-container {
       width: 100%;
       padding: 5px;
@@ -27,6 +36,7 @@
 }
 .detalhe-card-image {
   height: 400px;
+  width: 100%;
 }
 
 .texto-detalhe {
