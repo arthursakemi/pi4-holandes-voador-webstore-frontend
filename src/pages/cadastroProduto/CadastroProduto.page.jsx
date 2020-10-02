@@ -182,10 +182,10 @@ const CadastroProduto = () => {
           <div className="estoque-container">
             <h4>Estoque</h4>
             <div className="estoque-input-container">
-              <TextField label="p" name="p" onChange={handleChange} onBlur={trimWhiteSpace} type="number" />
-              <TextField label="m" name="m" onChange={handleChange} onBlur={trimWhiteSpace} type="number" />
-              <TextField label="g" name="g" onChange={handleChange} onBlur={trimWhiteSpace} type="number" />
-              <TextField label="unico" name="unico" onChange={handleChange} onBlur={trimWhiteSpace} type="number" />
+              <TextField label="p" name="p" onChange={handleChange} value={formData.p} onBlur={trimWhiteSpace} type="number" />
+              <TextField label="m" name="m" onChange={handleChange} value={formData.m} onBlur={trimWhiteSpace} type="number" />
+              <TextField label="g" name="g" onChange={handleChange} value={formData.g} onBlur={trimWhiteSpace} type="number" />
+              <TextField label="unico" name="unico" onChange={handleChange} value={formData.unico} onBlur={trimWhiteSpace} type="number" />
             </div>
           </div>
           <ListaPerguntas
