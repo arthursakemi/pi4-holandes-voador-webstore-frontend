@@ -26,11 +26,12 @@
 
 ## Sprint 2
 
-- [ ] Edição de produto
+- [x] Edição de produto
   - [x] Edição das imagens
-  - [ ] Edição das perguntas
+  - [x] Edição das perguntas
 - [ ] Pagina de vizualização individual dos produtos cadastrados
   - [ ] Atualizar o layout da página
 - [x] Pagina de vizualização de todos os produtos cadastrados
   - [x] Incluir a opção de todos os produtos no menu da tela principal
   - [x] Opção de filtragem de funcionalidades para clientes/administradores
+- [x] Landing Page
