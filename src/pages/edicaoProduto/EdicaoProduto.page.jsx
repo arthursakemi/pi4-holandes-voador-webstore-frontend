@@ -58,9 +58,11 @@ const EdicaoProduto = () => {
     Axios.post('https://api.imgur.com/3/image', data, config)
       .then((res) => {
         const src = res.data.data.link;
+        const url = `https://dutchman-backend-prod.herokuapp.com/imagem/`;
+        const newImage = { imagem: src, idProduto: produto.id };
 
-        Axios.post(`https://dutchman-backend-prod.herokuapp.com/imagem/`, { imagem: src, idProduto: produto.id }).then(() => {
-          setProduto((state) => ({ ...state, imagens: [...state.imagens, { imagem: src, idProduto: produto.id }] }));
+        Axios.post(url, newImage).then(() => {
+          setProduto((state) => ({ ...state, imagens: [...state.imagens, newImage] }));
           setImage({});
         });
       })
@@ -99,9 +101,9 @@ const EdicaoProduto = () => {
 
   const handleImageDelete = (e) => {
     const targetIndex = Number(e.currentTarget.name);
-    const imageToDeleteId = produto.imagens[targetIndex].id;
+    const imageId = produto.imagens[targetIndex].id;
 
-    const url = `https://dutchman-backend-prod.herokuapp.com/imagem/${imageToDeleteId}`;
+    const url = `https://dutchman-backend-prod.herokuapp.com/imagem/${imageId}`;
 
     Axios.delete(url)
       .then((res) => {
