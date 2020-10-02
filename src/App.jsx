@@ -18,6 +18,7 @@ function App() {
         <Route exact path="/produtos/cadastro" component={CadastroProduto} />
         <Route exact path="/produtos/:id" component={DetalheProduto} />
         <Route exact path="/produtos/editar/:id" component={EdicaoProduto} />
+        <Route exact path="/produtos/categoria/:categoria" component={GaleriaProdutos} />
         <Route path="/produtos" component={GaleriaProdutos} />
         <Route path="/" component={HomePage} />
       </Switch>

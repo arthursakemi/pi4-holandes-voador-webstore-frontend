@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import Axios from 'axios';
 
 import './galeriaProdutos.styles.scss';
@@ -12,6 +12,7 @@ import ProdutoCard from '../../components/card-produto-adm/CardProdutoAdm.compon
 import { Add } from '@material-ui/icons';
 
 const GaleriaProdutos = () => {
+  const [categoria] = useState(useParams().categoria);
   const [isAdmin, setIsAdmin] = useState(false);
   const [produtos, setProdutos] = useState([]);
   const [done, setDone] = useState(false);
@@ -40,7 +41,11 @@ const GaleriaProdutos = () => {
     Axios.get(url)
       .then((res) => {
         console.log(res);
-        setProdutos(res.data);
+        if(categoria) {
+          setProdutos(res.data.filter(el => el.categoria.toLowerCase() === categoria.toLowerCase()));
+        } else {
+          setProdutos(res.data)
+        }
       })
       .catch((e) => console.log(e))
       .finally(() => {
