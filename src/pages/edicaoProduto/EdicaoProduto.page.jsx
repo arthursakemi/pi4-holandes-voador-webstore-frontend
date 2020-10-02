@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { TextField, Button, MenuItem } from '@material-ui/core';
 import Axios from 'axios';
 import { isEqual } from 'lodash';
@@ -34,6 +34,8 @@ const EdicaoProduto = () => {
   const [progress, setProgress] = useState(0);
   const [image, setImage] = useState({});
   const [newPergunta, setNewPergunta] = useState(initialPergunta);
+
+  const history = useHistory();
 
   const uploadImage = async () => {
     if (isEqual(image, {})) {
@@ -249,7 +251,7 @@ const EdicaoProduto = () => {
             handleRemove={handleDeleteQuestion}
           />
           <div className="form-group">
-            <Button type="button" variant="contained" fullWidth>
+            <Button type="button" variant="contained" onClick={() => history.push('/produtos')} fullWidth>
               Cancelar
             </Button>
             <Button type="submit" variant="contained" color="primary" fullWidth>
