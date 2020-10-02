@@ -12,6 +12,7 @@ import UploadGallery from '../../components/upload-gallery/UploadGallery.compone
 import ListaPerguntas from '../../components/lista-perguntas/ListaPerguntas.component';
 import DoneOverlay from '../../components/done-overlay/DoneOverlay.component';
 import LoadingOverlay from '../../components/loading-overlay/LoadingOverlay.component';
+import { useHistory } from 'react-router-dom';
 
 const initialDataState = {
   nome: '',
@@ -38,6 +39,8 @@ const CadastroProduto = () => {
   const [formData, setFormData] = useState(initialDataState);
   const [newPergunta, setNewPergunta] = useState({ pergunta: '', resposta: '' });
   const [image, setImage] = useState({});
+
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -182,10 +185,10 @@ const CadastroProduto = () => {
           <div className="estoque-container">
             <h4>Estoque</h4>
             <div className="estoque-input-container">
-              <TextField label="p" name="p" onChange={handleChange} onBlur={trimWhiteSpace} type="number" />
-              <TextField label="m" name="m" onChange={handleChange} onBlur={trimWhiteSpace} type="number" />
-              <TextField label="g" name="g" onChange={handleChange} onBlur={trimWhiteSpace} type="number" />
-              <TextField label="unico" name="unico" onChange={handleChange} onBlur={trimWhiteSpace} type="number" />
+              <TextField label="p" name="p" onChange={handleChange} value={formData.p} onBlur={trimWhiteSpace} type="number" />
+              <TextField label="m" name="m" onChange={handleChange} value={formData.m} onBlur={trimWhiteSpace} type="number" />
+              <TextField label="g" name="g" onChange={handleChange} value={formData.g} onBlur={trimWhiteSpace} type="number" />
+              <TextField label="unico" name="unico" onChange={handleChange} value={formData.unico} onBlur={trimWhiteSpace} type="number" />
             </div>
           </div>
           <ListaPerguntas
@@ -197,7 +200,7 @@ const CadastroProduto = () => {
             handleRemove={handleDeleteQuestion}
           />
           <div className="form-group">
-            <Button type="button" onClick={resetForm} variant="contained" fullWidth>
+            <Button type="button" onClick={() => history.push('/produtos')} variant="contained" fullWidth>
               Cancelar
             </Button>
             <Button type="submit" variant="contained" color="primary" fullWidth>
