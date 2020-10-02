@@ -6,34 +6,28 @@ const sections = [
     linkUrl: 'produtos',
   },
   {
-    title: 'acessorios',
+    title: 'acessórios',
     imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
     id: 2,
-    linkUrl: 'shop/hats',
+    linkUrl: 'produtos/categoria/acessórios',
   },
   {
     title: 'casacos',
     imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
     id: 3,
-    linkUrl: 'shop/jackets',
-  },
-  {
-    title: 'calçados',
-    imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
-    id: 4,
-    linkUrl: 'shop/sneakers',
+    linkUrl: 'produtos/categoria/casacos',
   },
   {
     title: 'masculino',
     imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
-    id: 5,
-    linkUrl: 'shop/mens',
+    id: 4,
+    linkUrl: 'produtos/categoria/masculino',
   },
   {
     title: 'feminino',
     imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
-    id: 6,
-    linkUrl: 'shop/womens',
+    id: 5,
+    linkUrl: 'produtos/categoria/feminino',
   },
 ];
 
