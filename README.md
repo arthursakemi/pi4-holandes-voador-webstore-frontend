@@ -33,3 +33,4 @@
   - [ ] Atualizar o layout da página
 - [x] Pagina de vizualização de todos os produtos cadastrados
   - [x] Incluir a opção de todos os produtos no menu da tela principal
+  - [x] Opção de filtragem de funcionalidades para clientes/administradores
