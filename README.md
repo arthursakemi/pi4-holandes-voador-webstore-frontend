@@ -8,9 +8,9 @@
   - [x] Preço e estoque
   - [x] Imagens
   - [x] Q&A
-- [ ] Pagina de vizualização individual dos produtos cadastrados
+- [x] Pagina de vizualização individual dos produtos cadastrados
   - [x] Imagens no carrossel
-  - [ ] Q&A
+  - [x] Q&A
 - [x] Pagina de vizualização de todos os produtos cadastrados
   - [x] Listagem de todos os produtos
   - [x] Botões de atualização, exclusão e visualização
