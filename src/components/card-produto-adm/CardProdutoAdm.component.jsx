@@ -49,7 +49,7 @@ const ProdutoSimples = ({ produto, handleDelete, setReload, isAdmin }) => {
     <>
       <Card>
         <CardActionArea onClick={handleProductClick}>
-          <Carousel>
+          <Carousel autoPlay={false}>
             {produto.imagens.map(({ imagem }, index) => (
               <CardMedia key={index} className="card-image" image={imagem} title={produto.nome} />
             ))}
