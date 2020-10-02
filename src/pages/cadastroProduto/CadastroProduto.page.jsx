@@ -12,6 +12,7 @@ import UploadGallery from '../../components/upload-gallery/UploadGallery.compone
 import ListaPerguntas from '../../components/lista-perguntas/ListaPerguntas.component';
 import DoneOverlay from '../../components/done-overlay/DoneOverlay.component';
 import LoadingOverlay from '../../components/loading-overlay/LoadingOverlay.component';
+import { useHistory } from 'react-router-dom';
 
 const initialDataState = {
   nome: '',
@@ -38,6 +39,8 @@ const CadastroProduto = () => {
   const [formData, setFormData] = useState(initialDataState);
   const [newPergunta, setNewPergunta] = useState({ pergunta: '', resposta: '' });
   const [image, setImage] = useState({});
+
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -197,7 +200,7 @@ const CadastroProduto = () => {
             handleRemove={handleDeleteQuestion}
           />
           <div className="form-group">
-            <Button type="button" onClick={resetForm} variant="contained" fullWidth>
+            <Button type="button" onClick={() => history.push('/produtos')} variant="contained" fullWidth>
               Cancelar
             </Button>
             <Button type="submit" variant="contained" color="primary" fullWidth>
