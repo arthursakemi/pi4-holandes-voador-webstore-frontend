@@ -63,9 +63,8 @@ const EdicaoProduto = () => {
         const url = `https://dutchman-backend-prod.herokuapp.com/imagem/`;
         const newImage = { imagem: src, idProduto: produto.id };
 
-        Axios.post(url, newImage).then(({ data }) => {
-          console.log(data);
-          setProduto((state) => ({ ...state, imagens: [...state.imagens, data] }));
+        Axios.post(url, newImage).then(() => {
+          setProduto((state) => ({ ...state, imagens: [...state.imagens, newImage] }));
           setImage({});
         });
       })
