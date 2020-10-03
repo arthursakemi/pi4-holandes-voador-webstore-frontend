@@ -65,6 +65,7 @@ const EdicaoProduto = () => {
 
         Axios.post(url, newImage).then(({ data }) => {
           setProduto((state) => ({ ...state, imagens: [...state.imagens, data] }));
+
           setImage({});
         });
       })
