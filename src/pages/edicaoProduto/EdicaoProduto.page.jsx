@@ -90,6 +90,7 @@ const EdicaoProduto = () => {
 
   useEffect(() => {
     uploadImage();
+    // eslint-disable-next-line
   }, [image]);
 
   const handleChange = (e) => {

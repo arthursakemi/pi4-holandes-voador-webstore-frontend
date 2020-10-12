@@ -9,6 +9,7 @@ import CadastroProduto from './pages/cadastroProduto/CadastroProduto.page';
 import GaleriaProdutos from './pages/galeriaProdutos/GaleriaProdutos.page';
 import DetalheProduto from './pages/detalhe-produto/DetalheProduto.page';
 import EdicaoProduto from './pages/edicaoProduto/EdicaoProduto.page';
+import CadastroFuncionario from './pages/cadastroFuncionario/cadastroFuncionario.page';
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
         <Route exact path="/produtos/editar/:id" component={EdicaoProduto} />
         <Route exact path="/produtos/categoria/:categoria" component={GaleriaProdutos} />
         <Route path="/produtos" component={GaleriaProdutos} />
+        <Route exact path="/backofice/login" />
+        <Route exact path="/backofice/cadastro" component={CadastroFuncionario} />
+        <Route exact path="/backofice/usuarios" />
         <Route path="/" component={HomePage} />
       </Switch>
     </div>
