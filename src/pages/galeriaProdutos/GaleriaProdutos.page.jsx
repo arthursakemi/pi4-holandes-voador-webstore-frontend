@@ -11,9 +11,9 @@ import LoadingOverlay from '../../components/loading-overlay/LoadingOverlay.comp
 import ProdutoCard from '../../components/card-produto-adm/CardProdutoAdm.component';
 import { Add } from '@material-ui/icons';
 
-const GaleriaProdutos = () => {
+const GaleriaProdutos = ({ user }) => {
   const [categoria] = useState(useParams().categoria);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin] = useState(user.cargo === 'admin');
   const [produtos, setProdutos] = useState([]);
   const [done, setDone] = useState(false);
   const [success, setSuccess] = useState(true);
@@ -41,10 +41,10 @@ const GaleriaProdutos = () => {
     Axios.get(url)
       .then((res) => {
         console.log(res);
-        if(categoria) {
-          setProdutos(res.data.filter(el => el.categoria.toLowerCase() === categoria.toLowerCase()));
+        if (categoria) {
+          setProdutos(res.data.filter((el) => el.categoria.toLowerCase() === categoria.toLowerCase()));
         } else {
-          setProdutos(res.data)
+          setProdutos(res.data);
         }
       })
       .catch((e) => console.log(e))
@@ -53,17 +53,12 @@ const GaleriaProdutos = () => {
       });
   };
 
-  const toogleCheck = (e) => {
-    setIsAdmin(e.target.checked);
-  };
-
   useEffect(() => {
     getAllProdutos();
   }, [reload]);
 
   return (
     <main className="galeria-page">
-      <Switch className="admin-toogle" checked={isAdmin} onChange={toogleCheck} size="small" />
       {isAdmin ? (
         <Card>
           <CardActionArea className="add-product" onClick={() => history.push(`/produtos/cadastro`)}>
