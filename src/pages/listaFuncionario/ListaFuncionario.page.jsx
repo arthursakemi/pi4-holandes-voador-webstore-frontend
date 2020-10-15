@@ -23,7 +23,7 @@ const ListaFuncionario = () => {
     }, []);
 
     const handleAddAccountClick = () => {
-        history.push('/backofice/cadastro');
+        history.push('/backoffice/cadastro');
     }
 
     return (
