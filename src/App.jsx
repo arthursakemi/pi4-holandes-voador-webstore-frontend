@@ -11,6 +11,7 @@ import DetalheProduto from './pages/detalhe-produto/DetalheProduto.page';
 import EdicaoProduto from './pages/edicaoProduto/EdicaoProduto.page';
 import CadastroFuncionario from './pages/cadastroFuncionario/cadastroFuncionario.page';
 import ListaFuncionario from './pages/listaFuncionario/ListaFuncionario.page';
+import EdicaoFuncionario from './pages/edicaoFuncionario/EdicaoFuncionario.page';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route exact path="/backoffice/login" />
         <Route exact path="/backoffice/cadastro" component={CadastroFuncionario} />
         <Route exact path="/backoffice/funcionarios" component={ListaFuncionario}/>
+        <Route exact path="/backoffice/funcionarios/:id" component={EdicaoFuncionario}/>
         <Route path="/" component={HomePage} />
       </Switch>
     </div>
