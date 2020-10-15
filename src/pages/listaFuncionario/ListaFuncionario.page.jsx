@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom';
 import Axios from 'axios'
 
 import './listaFuncionario.styles.scss'
@@ -7,6 +8,7 @@ import { Typography, Table, TableBody, TableCell, TableContainer, TableHead, Tab
 import { Delete, AccountCircle, AddCircleOutline } from '@material-ui/icons'
 
 const ListaFuncionario = () => {
+    const history = useHistory();
     const [ listaFuncionarios, setListaFuncionarios ] = useState([]);
 
     useEffect(() => {
@@ -20,17 +22,20 @@ const ListaFuncionario = () => {
         });
     }, []);
 
+    const handleAddAccountClick = () => {
+        history.push('/backofice/cadastro');
+    }
+
     return (
-        <>
-        <div className="funcionarios-list">
+        <main className="funcionarios-list">
             <div className="funcionarios-list-head">
                 <Typography className="texto-detalhe" variant="h4" component="h2">
                     Funcionarios
                 </Typography>
-                <AddCircleOutline className="accountAdd" />
+                <AddCircleOutline onClick={handleAddAccountClick} className="accountAdd" />
             </div>
             <TableContainer component={Paper}>
-                <Table  aria-label="simple table">
+                <Table aria-label="simple table">
                     <TableHead>
                         <TableRow>
                             <TableCell>Nome</TableCell>
@@ -59,8 +64,7 @@ const ListaFuncionario = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
-        </div>
-        </>
+        </main>
     )
 }
 
