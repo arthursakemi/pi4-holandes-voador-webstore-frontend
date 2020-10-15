@@ -22,9 +22,9 @@ function App() {
         <Route exact path="/produtos/editar/:id" component={EdicaoProduto} />
         <Route exact path="/produtos/categoria/:categoria" component={GaleriaProdutos} />
         <Route path="/produtos" component={GaleriaProdutos} />
-        <Route exact path="/backofice/login" />
-        <Route exact path="/backofice/cadastro" component={CadastroFuncionario} />
-        <Route exact path="/backofice/funcionarios" component={ListaFuncionario}/>
+        <Route exact path="/backoffice/login" />
+        <Route exact path="/backoffice/cadastro" component={CadastroFuncionario} />
+        <Route exact path="/backoffice/funcionarios" component={ListaFuncionario}/>
         <Route path="/" component={HomePage} />
       </Switch>
     </div>
