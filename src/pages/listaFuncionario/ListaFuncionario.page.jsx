@@ -4,14 +4,21 @@ import Axios from 'axios'
 
 import './listaFuncionario.styles.scss'
 
-import { Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core'
+import Alert from '../../components/alert/Alert.component'
+import { Typography, Table, TableBody, TableCell, Modal, Button, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core'
 import { Delete, AccountCircle, AddCircleOutline } from '@material-ui/icons'
 
 const ListaFuncionario = () => {
     const history = useHistory();
     const [ listaFuncionarios, setListaFuncionarios ] = useState([]);
+    const [ alertDelete, setAlertDelete ] = useState(false);
+    const [ idToDelete, setIdToDelete ] = useState(0);
 
     useEffect(() => {
+        getAllAccounts();
+    }, []);
+
+    const getAllAccounts = () => {
         const url = 'https://dutchman-backend-prod.herokuapp.com/usuario';
         Axios.get(url).then((res) => {
             const funcionariosList = res.data;
@@ -20,7 +27,7 @@ const ListaFuncionario = () => {
         }).catch((err) => {
             console.log(err)
         });
-    }, []);
+    }    
 
     const handleAddAccountClick = () => {
         history.push('/backoffice/cadastro');
@@ -28,8 +35,27 @@ const ListaFuncionario = () => {
 
     const handleEditAccountClick = (e) => {
         const id = e.currentTarget.dataset.id
-        console.log(id)
         history.push(`/backoffice/funcionarios/${id}`);
+    }
+
+    const handleDeleteAccountClick = (e) => {
+        const id = e.currentTarget.dataset.id
+        setIdToDelete(id);
+        setAlertDelete(true);
+    }
+
+    const handleCancelDeleteConfirmation = () => {
+        setAlertDelete(false);
+    }
+
+    const deleteAccount = () => {
+        const url = `https://dutchman-backend-prod.herokuapp.com/usuario/${idToDelete}`
+        Axios.delete(url).then((res) => {
+            setAlertDelete(false);
+            getAllAccounts();
+        }).catch(err => {
+            console.log(err)
+        })
     }
 
     return (
@@ -63,13 +89,21 @@ const ListaFuncionario = () => {
                                     <AccountCircle data-id={el.id} className="accountInfo" onClick={handleEditAccountClick} />
                                 </TableCell>
                                 <TableCell align="center">
-                                    <Delete data-id={el.id} className="accountDelete" />
+                                    <Delete data-id={el.id} className="accountDelete" onClick={handleDeleteAccountClick} />
                                 </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
+            <Alert
+                open={alertDelete}
+                handleClose={handleCancelDeleteConfirmation}
+                handleConfirm={deleteAccount}
+                title="Confirmar exclusão de conta"
+                text={`Tem certeza que deseja excluir esta conta?`}
+                danger
+            />
         </main>
     )
 }
