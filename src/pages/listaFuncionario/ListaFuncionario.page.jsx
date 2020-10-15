@@ -26,6 +26,12 @@ const ListaFuncionario = () => {
         history.push('/backoffice/cadastro');
     }
 
+    const handleEditAccountClick = (e) => {
+        const id = e.currentTarget.dataset.id
+        console.log(id)
+        history.push(`/backoffice/funcionarios/${id}`);
+    }
+
     return (
         <main className="funcionarios-list">
             <div className="funcionarios-list-head">
@@ -47,17 +53,17 @@ const ListaFuncionario = () => {
                     </TableHead>
                     <TableBody>
                         {listaFuncionarios.map((el) => (
-                            <TableRow key={el.id}>
+                            <TableRow key={el.id} >
                                 <TableCell component="th" scope="row">
                                     {el.nome}
                                 </TableCell>
                                 <TableCell align="right">{el.email}</TableCell>
                                 <TableCell align="right">{el.cargo}</TableCell>
                                 <TableCell align="right">
-                                    <AccountCircle className="accountInfo" />
+                                    <AccountCircle data-id={el.id} className="accountInfo" onClick={handleEditAccountClick} />
                                 </TableCell>
                                 <TableCell align="center">
-                                    <Delete className="accountDelete" />
+                                    <Delete data-id={el.id} className="accountDelete" />
                                 </TableCell>
                             </TableRow>
                         ))}
