@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import './cadastroFuncionario.style.scss';
 
 import { TextField, Button, MenuItem } from '@material-ui/core';
-import { useEffect } from 'react';
 import Axios from 'axios';
 
 const initialFormData = {
@@ -27,6 +27,7 @@ const initialErrorState = {
 };
 
 const CadastroFuncionario = () => {
+  const history = useHistory();
   const [formData, setFormData] = useState(initialFormData);
   const [senha, setSenha] = useState(senhaInicial);
   const [error, setError] = useState(initialErrorState);
@@ -117,6 +118,10 @@ const CadastroFuncionario = () => {
     }
   }, [senha]);
 
+  const handleCancelCadastro = () => {
+    history.push('/backoffice/funcionarios')
+  }
+
   return (
     <main className="pagina-cadastro-funcionario">
       <h1 className="form-title">Cadastro de Funcionários</h1>
@@ -190,7 +195,7 @@ const CadastroFuncionario = () => {
             fullWidth
           />
           <div className="form-group">
-            <Button type="button" variant="contained" fullWidth>
+            <Button type="button" variant="contained" onClick={handleCancelCadastro} fullWidth>
               Cancelar
             </Button>
             <Button type="submit" variant="contained" color="primary" fullWidth>
