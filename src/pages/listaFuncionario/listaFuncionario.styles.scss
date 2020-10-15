@@ -19,7 +19,8 @@
 .funcionarios-list {
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: 100%;
+    max-width: 600px;
 }
 
 .accountInfo, .accountDelete {
