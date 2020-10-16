@@ -25,7 +25,6 @@ function App() {
 
   const handleLogOut = (e) => {
     e.preventDefault();
-    console.log('oi');
     sessionStorage.clear();
     setJwt(null);
     setUser(initialUser);
@@ -51,9 +50,9 @@ function App() {
         <Route exact path="/produtos/editar/:id" render={(props) => <EdicaoProduto {...appProps} {...props} />} />
         <Route exact path="/produtos/categoria/:categoria" render={(props) => <GaleriaProdutos {...appProps} {...props} />} />
         <Route path="/produtos" render={(props) => <GaleriaProdutos {...appProps} {...props} />} />
-        <Route exact path="/backofice/login" render={(props) => <LoginPage {...appProps} {...props} />} />
-        <Route exact path="/backofice/cadastro" render={(props) => <CadastroFuncionario {...appProps} {...props} />} />
-        <Route exact path="/backofice/usuarios" />
+        <Route exact path="/backoffice/login" render={(props) => <LoginPage {...appProps} {...props} />} />
+        <Route exact path="/backoffice/cadastro" render={(props) => <CadastroFuncionario {...appProps} {...props} />} />
+        <Route exact path="/backoffice/usuarios" />
         <Route path="/" component={HomePage} />
       </Switch>
     </div>

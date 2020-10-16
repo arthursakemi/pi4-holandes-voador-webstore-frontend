@@ -8,17 +8,27 @@ const UserBar = ({ user, handleLogOut }) => {
   const history = useHistory();
 
   const handleLoginClick = () => {
-    history.push('/backofice/login');
+    history.push('/backoffice/login');
+  };
+
+  const redirectToUserList = () => {
+    history.push('/backoffice');
   };
 
   return (
     <div className="user-bar">
       {user.nome ? (
         <>
-          <Button type="button" onClick={handleLogOut} color="inherit" size="small">
-            Logout
+          <div className="right-container">
+            <Button type="button" onClick={handleLogOut} color="inherit" size="small">
+              Logout
+            </Button>
+            <span>{user.nome}</span>
+          </div>
+
+          <Button className="backoffice-button" type="button" onClick={redirectToUserList} variant="outlined" color="inherit" size="small">
+            BackOffice
           </Button>
-          <span>{user.nome}</span>
         </>
       ) : (
         <Button type="button" onClick={handleLoginClick} variant="outlined" color="inherit" size="small">

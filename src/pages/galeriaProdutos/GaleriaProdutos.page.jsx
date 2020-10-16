@@ -13,7 +13,7 @@ import { Add } from '@material-ui/icons';
 
 const GaleriaProdutos = ({ user }) => {
   const [categoria] = useState(useParams().categoria);
-  const [isAdmin] = useState(user.cargo === 'admin');
+  const [showAdd, setShowAdd] = useState(user.cargo === 'admin' || user.cargo === 'estoquista');
   const [produtos, setProdutos] = useState([]);
   const [done, setDone] = useState(false);
   const [success, setSuccess] = useState(true);
@@ -54,12 +54,16 @@ const GaleriaProdutos = ({ user }) => {
   };
 
   useEffect(() => {
+    setShowAdd(user.cargo === 'admin' || user.cargo === 'estoquista');
+  }, [user]);
+
+  useEffect(() => {
     getAllProdutos();
   }, [reload]);
 
   return (
     <main className="galeria-page">
-      {isAdmin ? (
+      {showAdd ? (
         <Card>
           <CardActionArea className="add-product" onClick={() => history.push(`/produtos/cadastro`)}>
             <IconButton>
@@ -71,7 +75,7 @@ const GaleriaProdutos = ({ user }) => {
         ''
       )}
       {produtos.map((produto, index) => (
-        <ProdutoCard key={index} produto={produto} handleDelete={handleDelete} setReload={setReload} isAdmin={isAdmin} />
+        <ProdutoCard key={index} produto={produto} handleDelete={handleDelete} setReload={setReload} cargo={user.cargo} />
       ))}
       {done ? <DoneOverlay msg={overlayMsg} success={success} setDone={setDone} /> : ''}
       {loading ? <LoadingOverlay loadingText={loadingMsg} /> : ''}

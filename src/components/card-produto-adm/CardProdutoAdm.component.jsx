@@ -9,7 +9,7 @@ import { Card, CardActionArea, CardActions, CardMedia, CardContent, Typography, 
 import Carousel from 'react-material-ui-carousel';
 import EstoqueAlert from '../estoque-alert/EstoqueAlert.component';
 
-const ProdutoSimples = ({ produto, handleDelete, setReload, isAdmin }) => {
+const ProdutoSimples = ({ produto, handleDelete, setReload, cargo }) => {
   const [id] = useState(produto.id);
   const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
   const [openEstoque, setOpenEstoque] = useState(false);
@@ -63,18 +63,24 @@ const ProdutoSimples = ({ produto, handleDelete, setReload, isAdmin }) => {
             </Typography>
           </CardContent>
         </CardActionArea>
-        {isAdmin ? (
+        {cargo === 'admin' || cargo === 'estoquista' ? (
           <CardActions style={{ justifyContent: 'center' }}>
             <CardContent className="action-container">
               <Button type="button" onClick={handleEstoqueClick} variant="contained" color="primary">
                 Estoque
               </Button>
-              <Button type="button" onClick={redirectEditProduto} variant="contained" color="primary">
-                Editar
-              </Button>
-              <Button type="button" onClick={handleDeleteClick} variant="contained" color="secondary">
-                Excluir
-              </Button>
+              {cargo === 'admin' ? (
+                <>
+                  <Button type="button" onClick={redirectEditProduto} variant="contained" color="primary">
+                    Editar
+                  </Button>
+                  <Button type="button" onClick={handleDeleteClick} variant="contained" color="secondary">
+                    Excluir
+                  </Button>
+                </>
+              ) : (
+                ''
+              )}
             </CardContent>
           </CardActions>
         ) : (
