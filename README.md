@@ -41,13 +41,16 @@
 
 - [x] Cadastro de funcionários
   - [x] Armazenar no Banco de dados
-  - [x] Alterar no Banco de dados
-  - [x] Selecionar do Banco de dados
-  - [x] Soft Delete no Banco de dados
-  - [x] Selecionar todos do Banco de dados
   - [x] Tela de Cadastro de funcionário
+- [x] Alteração de funcionários
+  - [x] Alterar no Banco de dados
   - [x] Tela de Alteração de funcionário
+- [x] Visualização de funcionários cadastrados
+  - [x] Selecionar do Banco de dados
+  - [x] Selecionar todos do Banco de dados
   - [x] Tela de Visualização de funcionários cadastrados
-  - [x] Possibilidade de Alteração/Exclusão dos funcionários cadastrados
+- [x] Visualização de funcionários cadastrados e funções de edição/exclusão/cadastro na mesma página
+  - [x] Soft Delete no Banco de dados
+  - [x] Possibilidade de Alteração/Exclusão/Adicionar dos funcionários cadastrados
 - [ ] Tela de login
 - [x] Arrumar bug das imagens que acabamos de cadastrar impossibilitarem de serem excluídas.
