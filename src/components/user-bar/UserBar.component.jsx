@@ -22,7 +22,7 @@ const UserBar = ({ user, handleLogOut }) => {
   };
 
   const redirectToUserList = () => {
-    history.push('/backoffice');
+    history.push('/backoffice/funcionarios');
   };
 
   const redirectToPasswordChange = () => {

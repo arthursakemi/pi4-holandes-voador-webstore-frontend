@@ -1,4 +1,4 @@
-import React, {useState, useEffect}  from 'react';
+import React, { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import { verify } from 'jsonwebtoken';
@@ -46,7 +46,6 @@ function App() {
       <UserBar user={user} handleLogOut={handleLogOut} />
       <Header />
       <Switch>
-
         <Route exact path="/produtos/cadastro" render={(props) => <CadastroProduto {...appProps} {...props} />} />
         <Route exact path="/produtos/:id" render={(props) => <DetalheProduto {...appProps} {...props} />} />
         <Route exact path="/produtos/editar/:id" render={(props) => <EdicaoProduto {...appProps} {...props} />} />
@@ -54,8 +53,8 @@ function App() {
         <Route path="/produtos" render={(props) => <GaleriaProdutos {...appProps} {...props} />} />
         <Route exact path="/backoffice/login" render={(props) => <LoginPage {...appProps} {...props} />} />
         <Route exact path="/backoffice/cadastro" render={(props) => <CadastroFuncionario {...appProps} {...props} />} />
-        <Route exact path="/backoffice/funcionarios" component={ListaFuncionario} />
-        <Route exact path="/backoffice/funcionarios/:id" component={EdicaoFuncionario} />
+        <Route exact path="/backoffice/funcionarios" render={(props) => <ListaFuncionario {...appProps} {...props} />} />
+        <Route exact path="/backoffice/funcionarios/:id" render={(props) => <EdicaoFuncionario {...appProps} {...props} />} />
         <Route exact path="/backoffice/senha" render={(props) => <AlterarSenha {...appProps} {...props} />} />
 
         <Route path="/" component={HomePage} />

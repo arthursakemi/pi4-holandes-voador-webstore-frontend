@@ -8,7 +8,7 @@ import Alert from '../../components/alert/Alert.component';
 import { Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
 import { Delete, AccountCircle, AddCircleOutline } from '@material-ui/icons';
 
-const ListaFuncionario = () => {
+const ListaFuncionario = ({ user }) => {
   const history = useHistory();
   const [listaFuncionarios, setListaFuncionarios] = useState([]);
   const [alertDelete, setAlertDelete] = useState(false);
@@ -17,6 +17,12 @@ const ListaFuncionario = () => {
   useEffect(() => {
     getAllAccounts();
   }, []);
+
+  useEffect(() => {
+    if (!user.nome) {
+      history.push('/');
+    }
+  }, [user]);
 
   const getAllAccounts = () => {
     const url = 'https://dutchman-backend-prod.herokuapp.com/usuario';
@@ -42,6 +48,8 @@ const ListaFuncionario = () => {
 
   const handleDeleteAccountClick = (e) => {
     const id = e.currentTarget.dataset.id;
+    if (id == user.id) return;
+
     setIdToDelete(id);
     setAlertDelete(true);
   };
