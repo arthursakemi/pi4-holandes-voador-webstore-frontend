@@ -22,6 +22,7 @@ const LoginPage = ({ user, setJwt }) => {
   const handleLogin = (e) => {
     e.preventDefault();
     const url = 'https://dutchman-backend-prod.herokuapp.com/login';
+    console.log('oi');
     Axios.post(url, formData)
       .then((res) => {
         setJwt(res.data.jwtToken);

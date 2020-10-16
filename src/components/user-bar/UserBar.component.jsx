@@ -1,11 +1,21 @@
-import { Button } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import './userBar.styles.scss';
 
+import { Button, Menu, MenuItem } from '@material-ui/core';
+
 const UserBar = ({ user, handleLogOut }) => {
+  const [anchor, setAnchor] = useState(null);
   const history = useHistory();
+
+  const handleNameClick = (e) => {
+    setAnchor(e.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchor(null);
+  };
 
   const handleLoginClick = () => {
     history.push('/backoffice/login');
@@ -13,6 +23,10 @@ const UserBar = ({ user, handleLogOut }) => {
 
   const redirectToUserList = () => {
     history.push('/backoffice');
+  };
+
+  const redirectToPasswordChange = () => {
+    history.push('/backoffice/senha');
   };
 
   return (
@@ -23,7 +37,7 @@ const UserBar = ({ user, handleLogOut }) => {
             <Button type="button" onClick={handleLogOut} color="inherit" size="small">
               Logout
             </Button>
-            <span>{user.nome}</span>
+            <span onClick={handleNameClick}>{user.nome}</span>
           </div>
 
           <Button className="backoffice-button" type="button" onClick={redirectToUserList} variant="outlined" color="inherit" size="small">
@@ -35,6 +49,9 @@ const UserBar = ({ user, handleLogOut }) => {
           Login
         </Button>
       )}
+      <Menu anchorEl={anchor} open={Boolean(anchor)} onClose={handleClose} keepMounted>
+        <MenuItem onClick={redirectToPasswordChange}>Alterar Senha</MenuItem>
+      </Menu>
     </div>
   );
 };

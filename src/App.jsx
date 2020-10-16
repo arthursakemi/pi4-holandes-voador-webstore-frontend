@@ -16,8 +16,9 @@ import LoginPage from './pages/login/Login.page';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import UserBar from './components/user-bar/UserBar.component';
+import AlterarSenha from './pages/alterarSenha/AlterarSenha.page';
 
-const initialUser = { nome: '', email: '', cpf: '', cargo: '' };
+const initialUser = { id: '', nome: '', email: '', cpf: '', cargo: '' };
 
 function App() {
   const [jwt, setJwt] = useState(sessionStorage.getItem('jwtToken'));
@@ -53,6 +54,7 @@ function App() {
         <Route exact path="/backoffice/login" render={(props) => <LoginPage {...appProps} {...props} />} />
         <Route exact path="/backoffice/cadastro" render={(props) => <CadastroFuncionario {...appProps} {...props} />} />
         <Route exact path="/backoffice/usuarios" />
+        <Route exact path="/backoffice/senha" render={(props) => <AlterarSenha {...appProps} {...props} />} />
         <Route path="/" component={HomePage} />
       </Switch>
     </div>
