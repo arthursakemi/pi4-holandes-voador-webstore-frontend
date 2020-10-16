@@ -35,3 +35,19 @@
   - [x] Incluir a opção de todos os produtos no menu da tela principal
   - [x] Opção de filtragem de funcionalidades para clientes/administradores
 - [x] Landing Page
+
+
+## Sprint 3
+
+- [x] Cadastro de funcionários
+  - [x] Armazenar no Banco de dados
+  - [x] Alterar no Banco de dados
+  - [x] Selecionar do Banco de dados
+  - [x] Soft Delete no Banco de dados
+  - [x] Selecionar todos do Banco de dados
+  - [x] Tela de Cadastro de funcionário
+  - [x] Tela de Alteração de funcionário
+  - [x] Tela de Visualização de funcionários cadastrados
+  - [x] Possibilidade de Alteração/Exclusão dos funcionários cadastrados
+- [ ] Tela de login
+- [x] Arrumar bug das imagens que acabamos de cadastrar impossibilitarem de serem excluídas.
