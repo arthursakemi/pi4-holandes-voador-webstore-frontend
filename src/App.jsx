@@ -25,8 +25,8 @@ function App() {
         <Route path="/produtos" component={GaleriaProdutos} />
         <Route exact path="/backoffice/login" />
         <Route exact path="/backoffice/cadastro" component={CadastroFuncionario} />
-        <Route exact path="/backoffice/funcionarios" component={ListaFuncionario}/>
-        <Route exact path="/backoffice/funcionarios/:id" component={EdicaoFuncionario}/>
+        <Route exact path="/backoffice/funcionarios" component={ListaFuncionario} />
+        <Route exact path="/backoffice/funcionarios/:id" component={EdicaoFuncionario} />
         <Route path="/" component={HomePage} />
       </Switch>
     </div>
