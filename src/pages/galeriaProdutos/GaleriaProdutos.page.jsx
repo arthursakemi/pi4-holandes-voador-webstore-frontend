@@ -11,9 +11,9 @@ import LoadingOverlay from '../../components/loading-overlay/LoadingOverlay.comp
 import ProdutoCard from '../../components/card-produto-adm/CardProdutoAdm.component';
 import { Add } from '@material-ui/icons';
 
-const GaleriaProdutos = () => {
+const GaleriaProdutos = ({ user }) => {
   const [categoria] = useState(useParams().categoria);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [showAdd, setShowAdd] = useState(user.cargo === 'admin' || user.cargo === 'estoquista');
   const [produtos, setProdutos] = useState([]);
   const [done, setDone] = useState(false);
   const [success, setSuccess] = useState(true);
@@ -41,10 +41,10 @@ const GaleriaProdutos = () => {
     Axios.get(url)
       .then((res) => {
         console.log(res);
-        if(categoria) {
-          setProdutos(res.data.filter(el => el.categoria.toLowerCase() === categoria.toLowerCase()));
+        if (categoria) {
+          setProdutos(res.data.filter((el) => el.categoria.toLowerCase() === categoria.toLowerCase()));
         } else {
-          setProdutos(res.data)
+          setProdutos(res.data);
         }
       })
       .catch((e) => console.log(e))
@@ -53,9 +53,9 @@ const GaleriaProdutos = () => {
       });
   };
 
-  const toogleCheck = (e) => {
-    setIsAdmin(e.target.checked);
-  };
+  useEffect(() => {
+    setShowAdd(user.cargo === 'admin' || user.cargo === 'estoquista');
+  }, [user]);
 
   useEffect(() => {
     getAllProdutos();
@@ -63,8 +63,7 @@ const GaleriaProdutos = () => {
 
   return (
     <main className="galeria-page">
-      <Switch className="admin-toogle" checked={isAdmin} onChange={toogleCheck} size="small" />
-      {isAdmin ? (
+      {showAdd ? (
         <Card>
           <CardActionArea className="add-product" onClick={() => history.push(`/produtos/cadastro`)}>
             <IconButton>
@@ -76,7 +75,7 @@ const GaleriaProdutos = () => {
         ''
       )}
       {produtos.map((produto, index) => (
-        <ProdutoCard key={index} produto={produto} handleDelete={handleDelete} setReload={setReload} isAdmin={isAdmin} />
+        <ProdutoCard key={index} produto={produto} handleDelete={handleDelete} setReload={setReload} cargo={user.cargo} />
       ))}
       {done ? <DoneOverlay msg={overlayMsg} success={success} setDone={setDone} /> : ''}
       {loading ? <LoadingOverlay loadingText={loadingMsg} /> : ''}

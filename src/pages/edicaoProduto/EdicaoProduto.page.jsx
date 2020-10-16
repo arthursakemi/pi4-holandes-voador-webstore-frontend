@@ -8,6 +8,7 @@ import UploadGallery from '../../components/upload-gallery/UploadGallery.compone
 import ListaPerguntas from '../../components/lista-perguntas/ListaPerguntas.component';
 
 import './EdicaoProduto.styles.scss';
+import userEvent from '@testing-library/user-event';
 
 const initialDataState = {
   nome: '',
@@ -27,7 +28,7 @@ const initialPergunta = {
 
 const categorias = ['Acessórios', 'Casacos', 'Calçados', 'Masculino', 'Feminino'];
 
-const EdicaoProduto = () => {
+const EdicaoProduto = ({ user }) => {
   const [id] = useState(useParams().id);
   const [produto, setProduto] = useState(initialDataState);
   const [uploading, setUploading] = useState(false);
@@ -74,6 +75,14 @@ const EdicaoProduto = () => {
         setUploading(false);
       });
   };
+
+  useEffect(() => {
+    if (!user.cargo) {
+      history.push('/backofice/login');
+    } else if (user.cargo !== 'admin') {
+      history.push('/produtos');
+    }
+  }, []);
 
   useEffect(() => {
     const url = `https://dutchman-backend-prod.herokuapp.com/produto/${id}`;
