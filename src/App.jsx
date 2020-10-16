@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect}  from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import { verify } from 'jsonwebtoken';
@@ -13,10 +13,10 @@ import DetalheProduto from './pages/detalhe-produto/DetalheProduto.page';
 import EdicaoProduto from './pages/edicaoProduto/EdicaoProduto.page';
 import CadastroFuncionario from './pages/cadastroFuncionario/cadastroFuncionario.page';
 import LoginPage from './pages/login/Login.page';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import UserBar from './components/user-bar/UserBar.component';
 import AlterarSenha from './pages/alterarSenha/AlterarSenha.page';
+import ListaFuncionario from './pages/listaFuncionario/ListaFuncionario.page';
+import EdicaoFuncionario from './pages/edicaoFuncionario/EdicaoFuncionario.page';
 
 const initialUser = { id: '', nome: '', email: '', cpf: '', cargo: '' };
 
@@ -46,6 +46,7 @@ function App() {
       <UserBar user={user} handleLogOut={handleLogOut} />
       <Header />
       <Switch>
+
         <Route exact path="/produtos/cadastro" render={(props) => <CadastroProduto {...appProps} {...props} />} />
         <Route exact path="/produtos/:id" render={(props) => <DetalheProduto {...appProps} {...props} />} />
         <Route exact path="/produtos/editar/:id" render={(props) => <EdicaoProduto {...appProps} {...props} />} />
@@ -53,8 +54,10 @@ function App() {
         <Route path="/produtos" render={(props) => <GaleriaProdutos {...appProps} {...props} />} />
         <Route exact path="/backoffice/login" render={(props) => <LoginPage {...appProps} {...props} />} />
         <Route exact path="/backoffice/cadastro" render={(props) => <CadastroFuncionario {...appProps} {...props} />} />
-        <Route exact path="/backoffice/usuarios" />
+        <Route exact path="/backoffice/funcionarios" component={ListaFuncionario} />
+        <Route exact path="/backoffice/funcionarios/:id" component={EdicaoFuncionario} />
         <Route exact path="/backoffice/senha" render={(props) => <AlterarSenha {...appProps} {...props} />} />
+
         <Route path="/" component={HomePage} />
       </Switch>
     </div>

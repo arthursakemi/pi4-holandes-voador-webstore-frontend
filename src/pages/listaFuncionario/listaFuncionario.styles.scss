@@ -1,0 +1,28 @@
+.funcionarios-list-head {
+    display: flex;
+    flex-direction: row;
+}
+
+.texto-detalhe {
+    padding: 30px;
+    width: 80%;
+}
+
+.accountAdd {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    align-self: center;
+    cursor: pointer;
+}
+
+.funcionarios-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+}
+
+.accountInfo, .accountDelete {
+    cursor: pointer;
+}
