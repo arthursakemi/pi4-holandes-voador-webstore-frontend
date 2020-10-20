@@ -1,10 +1,10 @@
 .funcionarios-list-head {
   display: flex;
   align-items: center;
-}
 
-.texto-detalhe {
-  padding: 30px 0;
+  .texto-detalhe {
+    padding: 30px 0;
+  }
 }
 
 .accountAdd {
@@ -25,4 +25,10 @@
 .accountInfo,
 .accountDelete {
   cursor: pointer;
+}
+
+@media only screen and (max-width: 500px) {
+  .table .name-column {
+    display: none;
+  }
 }

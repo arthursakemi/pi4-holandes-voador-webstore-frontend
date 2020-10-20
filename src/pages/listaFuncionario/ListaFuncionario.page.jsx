@@ -78,13 +78,13 @@ const ListaFuncionario = ({ user }) => {
         </Typography>
         <AddCircleOutline onClick={handleAddAccountClick} className="accountAdd" />
       </div>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} className="table">
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Nome</TableCell>
-              <TableCell align="right">Email</TableCell>
-              <TableCell align="right">Cargo</TableCell>
+              <TableCell className="name-column">Nome</TableCell>
+              <TableCell align="left">Email</TableCell>
+              <TableCell align="left">Cargo</TableCell>
               <TableCell align="right"></TableCell>
               <TableCell align="right"></TableCell>
             </TableRow>
@@ -92,11 +92,11 @@ const ListaFuncionario = ({ user }) => {
           <TableBody>
             {listaFuncionarios.map((usuario) => (
               <TableRow key={usuario.id}>
-                <TableCell component="th" scope="row">
+                <TableCell className="name-column" component="th" scope="row">
                   {usuario.nome}
                 </TableCell>
-                <TableCell align="right">{usuario.email}</TableCell>
-                <TableCell align="right">{usuario.cargo}</TableCell>
+                <TableCell align="left">{usuario.email}</TableCell>
+                <TableCell align="left">{usuario.cargo}</TableCell>
                 <TableCell align="right">
                   <AccountCircle data-id={usuario.id} className="accountInfo" onClick={handleEditAccountClick} />
                 </TableCell>
