@@ -40,9 +40,20 @@ const UserBar = ({ user, handleLogOut }) => {
             <span onClick={handleNameClick}>{user.nome}</span>
           </div>
 
-          <Button className="backoffice-button" type="button" onClick={redirectToUserList} variant="outlined" color="inherit" size="small">
-            BackOffice
-          </Button>
+          {user.cargo !== 'cliente' ? (
+            <Button
+              className="backoffice-button"
+              type="button"
+              onClick={redirectToUserList}
+              variant="outlined"
+              color="inherit"
+              size="small"
+            >
+              BackOffice
+            </Button>
+          ) : (
+            ''
+          )}
         </>
       ) : (
         <Button type="button" onClick={handleLoginClick} variant="outlined" color="inherit" size="small">

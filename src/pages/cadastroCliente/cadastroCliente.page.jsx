@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import './cadastroFuncionario.styles.scss';
+import './cadastroCliente.styles.scss';
 
 import { TextField, Button, MenuItem } from '@material-ui/core';
 import Axios from 'axios';
@@ -10,8 +10,15 @@ const initialFormData = {
   nome: '',
   cpf: '',
   email: '',
+  enderecoFaturamento: {
+    cep: '',
+    endereco: '',
+    numero: '',
+    complemento: '',
+  },
+  enderecosEntrega: [],
   senha: '',
-  cargo: '',
+  cargo: 'cliente',
 };
 
 const senhaInicial = {
@@ -26,7 +33,7 @@ const initialErrorState = {
   senha: false,
 };
 
-const CadastroFuncionario = () => {
+const CadastroCliente = () => {
   const history = useHistory();
   const [formData, setFormData] = useState(initialFormData);
   const [senha, setSenha] = useState(senhaInicial);
@@ -38,6 +45,11 @@ const CadastroFuncionario = () => {
       value = capitalize(value);
     }
     setFormData((state) => ({ ...state, [name]: value }));
+  };
+
+  const handleAdressChange = (e) => {
+    let { value, name } = e.target;
+    setFormData((state) => ({ ...state, enderecoFaturamento: { ...formData.enderecoFaturamento, [name]: value } }));
   };
 
   const capitalize = (text) => {
@@ -76,6 +88,15 @@ const CadastroFuncionario = () => {
     setFormData((state) => ({ ...state, [name]: value.trim() }));
   };
 
+  const getAddressViaCep = (e) => {
+    const cep = e.target.value;
+    const url = `https://viacep.com.br/ws/${cep}/json`;
+
+    Axios.get(url)
+      .then()
+      .catch((e) => console.log(e));
+  };
+
   // valida o campo email
   useEffect(() => {
     const { email } = formData;
@@ -101,7 +122,7 @@ const CadastroFuncionario = () => {
   // valida se o campo nome não possui numeros e tem mais de 5 caracteres
   useEffect(() => {
     const { nome } = formData;
-    if ((nome.length >= 5 || nome.trim() === '') && !/[0-9]/.test(nome)) {
+    if (((nome.length >= 5 && nome.split(' ').length >= 2) || nome.trim() === '') && !/[0-9]/.test(nome)) {
       setError((state) => ({ ...state, nome: false }));
     } else {
       setError((state) => ({ ...state, nome: true }));
@@ -124,8 +145,8 @@ const CadastroFuncionario = () => {
 
   return (
     <main className="pagina-cadastro-funcionario">
-      <h1 className="form-title">Cadastro de Funcionários</h1>
-      <form onSubmit={handleSubmit}>
+      <h1 className="form-title">Cadastro de Cliente</h1>
+      <form onSubmit={''}>
         <div className="form-container">
           <TextField
             name="nome"
@@ -134,13 +155,14 @@ const CadastroFuncionario = () => {
             onChange={handleChange}
             onBlur={trimWhiteSpace}
             error={error.nome}
-            helperText={error.nome ? 'Nome deve conter 5 ou mais caracteres alfabéticos' : ''}
+            helperText={error.nome ? 'Campo deve conter nome e sobrenome e no mínimo 5 caracteres não numéricos' : ''}
             required
             fullWidth
           />
           <TextField
             name="cpf"
             label="CPF"
+            type="number"
             value={formData.cpf}
             onChange={handleChange}
             onBlur={trimWhiteSpace}
@@ -161,18 +183,53 @@ const CadastroFuncionario = () => {
             fullWidth
           />
           <TextField
-            name="cargo"
-            label="Cargo"
-            value={formData.cargo}
-            onChange={handleChange}
-            onBlur={trimWhiteSpace}
-            select
+            name="cep"
+            label="CEP"
+            type="number"
+            value={formData.enderecoFaturamento.cep}
+            onChange={handleAdressChange}
+            onBlur={''}
+            error={error.email}
+            helperText={error.email ? 'Email inválido!' : ''}
             required
             fullWidth
-          >
-            <MenuItem value="admin">Administrador</MenuItem>
-            <MenuItem value="estoquista">Estoquista</MenuItem>
-          </TextField>
+          />
+          <TextField
+            name="endereco"
+            label="Endereço"
+            value={formData.enderecoFaturamento.endereco}
+            onChange={handleAdressChange}
+            onBlur={''}
+            error={error.email}
+            helperText={error.email ? 'Email inválido!' : ''}
+            required
+            fullWidth
+          />
+          <div className="form-group">
+            <TextField
+              name="numero"
+              label="Número"
+              value={formData.enderecoFaturamento.numero}
+              onChange={handleAdressChange}
+              onBlur={''}
+              error={error.email}
+              helperText={error.email ? 'Email inválido!' : ''}
+              required
+              fullWidth
+            />
+            <TextField
+              name="complemento"
+              label="Complemento"
+              value={formData.enderecoFaturamento.complemento}
+              onChange={handleAdressChange}
+              onBlur={''}
+              error={error.email}
+              helperText={error.email ? 'Email inválido!' : ''}
+              required
+              fullWidth
+            />
+          </div>
+
           <TextField
             name="senha"
             label="Senha"
@@ -208,4 +265,4 @@ const CadastroFuncionario = () => {
   );
 };
 
-export default CadastroFuncionario;
+export default CadastroCliente;

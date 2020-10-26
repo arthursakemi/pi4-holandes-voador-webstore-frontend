@@ -19,7 +19,7 @@ const ListaFuncionario = ({ user }) => {
   }, []);
 
   useEffect(() => {
-    if (!user.nome) {
+    if (!user.nome || user.cargo == 'cliente') {
       history.push('/');
     }
   }, [user]);
@@ -83,8 +83,12 @@ const ListaFuncionario = ({ user }) => {
           <TableHead>
             <TableRow>
               <TableCell className="name-column">Nome</TableCell>
-              <TableCell align="left">Email</TableCell>
-              <TableCell align="left">Cargo</TableCell>
+              <TableCell className="email-column" align="left">
+                Email
+              </TableCell>
+              <TableCell className="cargo-column" align="left">
+                Cargo
+              </TableCell>
               <TableCell align="right"></TableCell>
               <TableCell align="right"></TableCell>
             </TableRow>
@@ -95,8 +99,12 @@ const ListaFuncionario = ({ user }) => {
                 <TableCell className="name-column" component="th" scope="row">
                   {usuario.nome}
                 </TableCell>
-                <TableCell align="left">{usuario.email}</TableCell>
-                <TableCell align="left">{usuario.cargo}</TableCell>
+                <TableCell className="email-column" align="left">
+                  {usuario.email}
+                </TableCell>
+                <TableCell className="cargo-column" align="left">
+                  {usuario.cargo}
+                </TableCell>
                 <TableCell align="right">
                   <AccountCircle data-id={usuario.id} className="accountInfo" onClick={handleEditAccountClick} />
                 </TableCell>

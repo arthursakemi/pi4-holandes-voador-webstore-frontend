@@ -4,6 +4,7 @@ import './alterarSenha.styles.scss';
 
 import { TextField, Button } from '@material-ui/core';
 import Axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const initialFormData = {
   senha: '',
@@ -24,6 +25,7 @@ const AlterarSenha = ({ user }) => {
   const [senha, setSenha] = useState(initialPassword);
   const [formData, setFormData] = useState(initialFormData);
   const [error, setError] = useState(initialError);
+  const history = useHistory();
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -43,8 +45,8 @@ const AlterarSenha = ({ user }) => {
 
     if (novaSenha || senhaAtual) return;
 
-    const urlLogin = 'https://dutchman-backend-prod.herokuapp.com/login';
-    const urlAlteracao = `https://dutchman-backend-prod.herokuapp.com/usuario/${user.id}/senha`;
+    const urlLogin = `https://dutchman-backend-prod.herokuapp.com/${user.cargo === 'cliente' ? 'cliente' : 'funcionario'}/login`;
+    const urlAlteracao = `https://dutchman-backend-prod.herokuapp.com/${user.cargo === 'cliente' ? 'cliente' : 'usuario'}/${user.id}/senha`;
 
     Axios.post(urlLogin, { usuario: user.email, senha: senha.senhaAtual })
       .then(({ data }) => {
@@ -63,6 +65,12 @@ const AlterarSenha = ({ user }) => {
       })
       .catch((e) => console.log(e));
   };
+
+  useEffect(() => {
+    if (!user.nome) {
+      history.push('/');
+    }
+  }, [user]);
 
   // valida se o campo senha e a confirmacao sao iguais
   useEffect(() => {

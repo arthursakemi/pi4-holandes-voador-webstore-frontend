@@ -2,7 +2,7 @@ import React from 'react';
 
 import './login.styles.scss';
 
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, FormControlLabel, Switch } from '@material-ui/core';
 import { useState } from 'react';
 import Axios from 'axios';
 import { useEffect } from 'react';
@@ -12,6 +12,7 @@ const initialFormData = { usuario: '', senha: '' };
 
 const LoginPage = ({ user, setJwt }) => {
   const [formData, setFormData] = useState(initialFormData);
+  const [isEmployee, setIsEmployee] = useState(false);
   const history = useHistory();
 
   const handleChange = (e) => {
@@ -21,8 +22,7 @@ const LoginPage = ({ user, setJwt }) => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const url = 'https://dutchman-backend-prod.herokuapp.com/login';
-    console.log('oi');
+    const url = `https://dutchman-backend-prod.herokuapp.com/login/${isEmployee ? 'funcionario' : 'cliente'}`;
     Axios.post(url, formData)
       .then((res) => {
         setJwt(res.data.jwtToken);
@@ -47,6 +47,7 @@ const LoginPage = ({ user, setJwt }) => {
       <h1 className="form-title">Login</h1>
       <form onSubmit={handleLogin}>
         <div className="login-container">
+          <FormControlLabel control={<Switch checked={isEmployee} onChange={() => setIsEmployee(!isEmployee)} />} label="Funcionário" />
           <TextField label="usuario" name="usuario" value={formData.usuario} onChange={handleChange} onBlur={trimWhiteSpace} fullWidth />
           <TextField
             label="senha"
