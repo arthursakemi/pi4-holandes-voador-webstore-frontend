@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import './cadastroCliente.styles.scss';
 
-import { TextField, Button, MenuItem } from '@material-ui/core';
+import { TextField, Button } from '@material-ui/core';
 import Axios from 'axios';
 
 const initialFormData = {
@@ -15,6 +15,9 @@ const initialFormData = {
     endereco: '',
     numero: '',
     complemento: '',
+    cidade: '',
+    uf: '',
+    bairro: '',
   },
   enderecosEntrega: [],
   senha: '',
@@ -31,6 +34,7 @@ const initialErrorState = {
   cpf: false,
   email: false,
   senha: false,
+  cep: false,
 };
 
 const CadastroCliente = () => {
@@ -66,9 +70,9 @@ const CadastroCliente = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { cpf, nome, email, senha } = error;
+    const { cpf, nome, email, senha, cep } = error;
 
-    if (cpf || nome || email || senha) return;
+    if (cpf || nome || email || senha || cep) return;
 
     const url = 'https://dutchman-backend-prod.herokuapp.com/usuario';
 
@@ -93,8 +97,29 @@ const CadastroCliente = () => {
     const url = `https://viacep.com.br/ws/${cep}/json`;
 
     Axios.get(url)
-      .then()
-      .catch((e) => console.log(e));
+      .then(({ data }) => {
+        if (!data.erro) {
+          setFormData((state) => ({
+            ...state,
+            enderecoFaturamento: {
+              cep: cep,
+              endereco: data.logradouro,
+              numero: '',
+              complemento: '',
+              cidade: data.localidade,
+              uf: data.uf,
+              bairro: data.bairro,
+            },
+          }));
+          setError((state) => ({ ...state, cep: false }));
+        } else {
+          setError((state) => ({ ...state, cep: true }));
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+        setError((state) => ({ ...state, cep: true }));
+      });
   };
 
   // valida o campo email
@@ -183,14 +208,35 @@ const CadastroCliente = () => {
             fullWidth
           />
           <TextField
+            name="senha"
+            label="Senha"
+            type="password"
+            value={senha.senha}
+            onChange={handlePasswordChange}
+            error={error.senha}
+            required
+            fullWidth
+          />
+          <TextField
+            name="confirmacaoSenha"
+            label="Confirme sua Senha"
+            type="password"
+            value={senha.confirmacaoSenha}
+            onChange={handlePasswordChange}
+            error={error.senha}
+            helperText={error.senha ? 'As senhas informadas devem ser iguais!' : ''}
+            required
+            fullWidth
+          />
+          <TextField
             name="cep"
             label="CEP"
             type="number"
             value={formData.enderecoFaturamento.cep}
             onChange={handleAdressChange}
-            onBlur={''}
-            error={error.email}
-            helperText={error.email ? 'Email inválido!' : ''}
+            onBlur={getAddressViaCep}
+            error={error.cep}
+            helperText={error.cep ? 'CEP inválido' : ''}
             required
             fullWidth
           />
@@ -200,8 +246,7 @@ const CadastroCliente = () => {
             value={formData.enderecoFaturamento.endereco}
             onChange={handleAdressChange}
             onBlur={''}
-            error={error.email}
-            helperText={error.email ? 'Email inválido!' : ''}
+            disabled
             required
             fullWidth
           />
@@ -225,32 +270,40 @@ const CadastroCliente = () => {
               onBlur={''}
               error={error.email}
               helperText={error.email ? 'Email inválido!' : ''}
+              fullWidth
+            />
+            <TextField
+              name="cidade"
+              label="Cidade"
+              value={formData.enderecoFaturamento.cidade}
+              onChange={handleAdressChange}
+              onBlur={''}
+              disabled
+              required
+              fullWidth
+            />
+            <TextField
+              name="uf"
+              label="UF"
+              value={formData.enderecoFaturamento.uf}
+              onChange={handleAdressChange}
+              onBlur={''}
+              disabled
               required
               fullWidth
             />
           </div>
+          <TextField
+            name="bairro"
+            label="Bairro"
+            value={formData.enderecoFaturamento.bairro}
+            onChange={handleAdressChange}
+            onBlur={''}
+            disabled
+            required
+            fullWidth
+          />
 
-          <TextField
-            name="senha"
-            label="Senha"
-            type="password"
-            value={senha.senha}
-            onChange={handlePasswordChange}
-            error={error.senha}
-            required
-            fullWidth
-          />
-          <TextField
-            name="confirmacaoSenha"
-            label="Confirme sua Senha"
-            type="password"
-            value={senha.confirmacaoSenha}
-            onChange={handlePasswordChange}
-            error={error.senha}
-            helperText={error.senha ? 'As senhas informadas devem ser iguais!' : ''}
-            required
-            fullWidth
-          />
           <div className="form-group">
             <Button type="button" variant="contained" onClick={handleCancelCadastro} fullWidth>
               Cancelar
