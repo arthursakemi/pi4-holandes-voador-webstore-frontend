@@ -18,7 +18,7 @@ const UserBar = ({ user, handleLogOut }) => {
   };
 
   const handleLoginClick = () => {
-    history.push('/backoffice/login');
+    history.push('/login');
   };
 
   const redirectToUserList = () => {

@@ -52,7 +52,7 @@ function App() {
         <Route exact path="/produtos/editar/:id" render={(props) => <EdicaoProduto {...appProps} {...props} />} />
         <Route exact path="/produtos/categoria/:categoria" render={(props) => <GaleriaProdutos {...appProps} {...props} />} />
         <Route path="/produtos" render={(props) => <GaleriaProdutos {...appProps} {...props} />} />
-        <Route exact path="/backoffice/login" render={(props) => <LoginPage {...appProps} {...props} />} />
+        <Route exact path="/login" render={(props) => <LoginPage {...appProps} {...props} />} />
         <Route exact path="/backoffice/cadastro" render={(props) => <CadastroFuncionario {...appProps} {...props} />} />
         <Route exact path="/cadastro/cliente" render={(props) => <CadastroCliente {...appProps} {...props} />} />
         <Route exact path="/backoffice/funcionarios" render={(props) => <ListaFuncionario {...appProps} {...props} />} />

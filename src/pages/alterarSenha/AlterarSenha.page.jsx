@@ -45,7 +45,7 @@ const AlterarSenha = ({ user }) => {
 
     if (novaSenha || senhaAtual) return;
 
-    const urlLogin = `https://dutchman-backend-prod.herokuapp.com/${user.cargo === 'cliente' ? 'cliente' : 'funcionario'}/login`;
+    const urlLogin = `https://dutchman-backend-prod.herokuapp.com/login/${user.cargo === 'cliente' ? 'cliente' : 'funcionario'}`;
     const urlAlteracao = `https://dutchman-backend-prod.herokuapp.com/${user.cargo === 'cliente' ? 'cliente' : 'usuario'}/${user.id}/senha`;
 
     Axios.post(urlLogin, { usuario: user.email, senha: senha.senhaAtual })
@@ -122,7 +122,7 @@ const AlterarSenha = ({ user }) => {
               fullWidth
             />
             <div className="form-group">
-              <Button type="submit" variant="contained" fullWidth>
+              <Button type="button" variant="contained" fullWidth>
                 Cancelar
               </Button>
               <Button type="submit" variant="contained" color="primary" fullWidth>
