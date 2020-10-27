@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import './cadastroFuncionario.style.scss';
+import './cadastroFuncionario.styles.scss';
 
 import { TextField, Button, MenuItem } from '@material-ui/core';
 import Axios from 'axios';
@@ -119,8 +119,8 @@ const CadastroFuncionario = () => {
   }, [senha]);
 
   const handleCancelCadastro = () => {
-    history.push('/backoffice/funcionarios')
-  }
+    history.push('/backoffice/funcionarios');
+  };
 
   return (
     <main className="pagina-cadastro-funcionario">

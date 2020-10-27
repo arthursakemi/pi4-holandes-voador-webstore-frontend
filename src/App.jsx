@@ -17,6 +17,7 @@ import UserBar from './components/user-bar/UserBar.component';
 import AlterarSenha from './pages/alterarSenha/AlterarSenha.page';
 import ListaFuncionario from './pages/listaFuncionario/ListaFuncionario.page';
 import EdicaoFuncionario from './pages/edicaoFuncionario/EdicaoFuncionario.page';
+import CadastroCliente from './pages/cadastroCliente/cadastroCliente.page';
 
 const initialUser = { id: '', nome: '', email: '', cpf: '', cargo: '' };
 
@@ -51,8 +52,9 @@ function App() {
         <Route exact path="/produtos/editar/:id" render={(props) => <EdicaoProduto {...appProps} {...props} />} />
         <Route exact path="/produtos/categoria/:categoria" render={(props) => <GaleriaProdutos {...appProps} {...props} />} />
         <Route path="/produtos" render={(props) => <GaleriaProdutos {...appProps} {...props} />} />
-        <Route exact path="/backoffice/login" render={(props) => <LoginPage {...appProps} {...props} />} />
+        <Route exact path="/login" render={(props) => <LoginPage {...appProps} {...props} />} />
         <Route exact path="/backoffice/cadastro" render={(props) => <CadastroFuncionario {...appProps} {...props} />} />
+        <Route exact path="/cadastro/cliente" render={(props) => <CadastroCliente {...appProps} {...props} />} />
         <Route exact path="/backoffice/funcionarios" render={(props) => <ListaFuncionario {...appProps} {...props} />} />
         <Route exact path="/backoffice/funcionarios/:id" render={(props) => <EdicaoFuncionario {...appProps} {...props} />} />
         <Route exact path="/backoffice/senha" render={(props) => <AlterarSenha {...appProps} {...props} />} />

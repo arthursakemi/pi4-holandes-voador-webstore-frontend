@@ -1,0 +1,25 @@
+.galeria-vazia {
+  border: 1px solid black;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.galeria-enderecos {
+  border: 1px solid black;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.endereco-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-endereco {
+  display: flex;
+}

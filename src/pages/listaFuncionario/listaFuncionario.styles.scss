@@ -28,7 +28,14 @@
 }
 
 @media only screen and (max-width: 500px) {
-  .table .name-column {
+  .table .email-column {
     display: none;
+  }
+  .table .cargo-column {
+    display: none;
+  }
+
+  .funcionarios-list {
+    padding: 10px;
   }
 }
