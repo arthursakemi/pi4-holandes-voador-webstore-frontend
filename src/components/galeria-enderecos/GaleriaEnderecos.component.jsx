@@ -2,13 +2,31 @@ import React from 'react';
 
 import './galeriaEnderecos.styles.scss';
 
+import Axios from 'axios';
+
 import { IconButton } from '@material-ui/core';
 import { CancelOutlined } from '@material-ui/icons';
 
-const GaleriaEnderecos = ({ enderecos, setEnderecos }) => {
+const GaleriaEnderecos = ({ enderecos, setEnderecos, edicao, getCurrentClient }) => {
   const handleRemove = (e) => {
-    const id = Number(e.currentTarget.dataset.id);
-    setEnderecos((state) => state.filter((el, index) => index !== id));
+    const arrayIndex = Number(e.currentTarget.dataset.index);
+    if (edicao) {
+      const id = Number(e.currentTarget.dataset.id);
+      console.log(id);
+      deleteAddress(id);
+    }
+    setEnderecos((state) => state.filter((el, index) => index !== arrayIndex));
+  };
+
+  const deleteAddress = (id) => {
+    const url = `https://dutchman-backend-prod.herokuapp.com/endereco/${id}`;
+
+    Axios.delete(url)
+      .then((res) => {
+        console.log(res.data);
+        getCurrentClient();
+      })
+      .catch((e) => console.log(e));
   };
 
   if (enderecos.length === 0) {
@@ -27,7 +45,14 @@ const GaleriaEnderecos = ({ enderecos, setEnderecos }) => {
               <span>{`${endereco.cidade} - ${endereco.uf}`}</span>
             </div>
             <div className="flex-box">
-              <IconButton className="faq-add-btn" data-id={index} type="button" color="secondary" onClick={handleRemove}>
+              <IconButton
+                className="faq-add-btn"
+                data-index={index}
+                data-id={endereco.id}
+                type="button"
+                color="secondary"
+                onClick={handleRemove}
+              >
                 <CancelOutlined />
               </IconButton>
             </div>
