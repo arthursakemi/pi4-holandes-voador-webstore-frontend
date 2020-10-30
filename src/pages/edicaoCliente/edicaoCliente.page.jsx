@@ -37,7 +37,7 @@ const initialErrorState = {
   cep: false,
 };
 
-const EdicaoCliente = () => {
+const EdicaoCliente = ({ user }) => {
   const history = useHistory();
   const userId = useParams().id;
   const [formData, setFormData] = useState(initialFormData);
@@ -72,6 +72,8 @@ const EdicaoCliente = () => {
       setPasso((state) => state + 1);
       return;
     }
+
+    history.push('/');
   };
 
   const updateClienteInfo = (id, cliente) => {
@@ -123,6 +125,12 @@ const EdicaoCliente = () => {
 
   useEffect(() => {
     getCurrentClient();
+  }, []);
+
+  useEffect(() => {
+    if (user.cargo !== 'cliente') {
+      history.push('/');
+    }
   }, []);
 
   const getCurrentClient = () => {
