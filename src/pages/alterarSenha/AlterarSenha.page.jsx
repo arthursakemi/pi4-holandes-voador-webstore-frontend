@@ -70,7 +70,7 @@ const AlterarSenha = ({ user }) => {
     if (!user.nome) {
       history.push('/');
     }
-  }, [user]);
+  }, [user, history]);
 
   // valida se o campo senha e a confirmacao sao iguais
   useEffect(() => {

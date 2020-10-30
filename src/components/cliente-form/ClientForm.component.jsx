@@ -7,7 +7,7 @@ const senhaInicial = {
   confirmacaoSenha: '',
 };
 
-const ClientForm = ({ formData, setFormData, error, setError }) => {
+const ClientForm = ({ formData, setFormData, error, setError, edicao }) => {
   const [senha, setSenha] = useState(senhaInicial);
 
   const handleChange = (e) => {
@@ -99,6 +99,7 @@ const ClientForm = ({ formData, setFormData, error, setError }) => {
         onBlur={trimWhiteSpace}
         error={error.cpf}
         helperText={error.cpf ? 'CPF inválido' : ''}
+        disabled={!!edicao}
         required
         fullWidth
       />
@@ -110,30 +111,37 @@ const ClientForm = ({ formData, setFormData, error, setError }) => {
         onBlur={trimWhiteSpace}
         error={error.email}
         helperText={error.email ? 'Email inválido!' : ''}
+        disabled={!!edicao}
         required
         fullWidth
       />
-      <TextField
-        name="senha"
-        label="Senha"
-        type="password"
-        value={senha.senha}
-        onChange={handlePasswordChange}
-        error={error.senha}
-        required
-        fullWidth
-      />
-      <TextField
-        name="confirmacaoSenha"
-        label="Confirme sua Senha"
-        type="password"
-        value={senha.confirmacaoSenha}
-        onChange={handlePasswordChange}
-        error={error.senha}
-        helperText={error.senha ? 'As senhas informadas devem ser iguais!' : ''}
-        required
-        fullWidth
-      />
+      {edicao ? (
+        ''
+      ) : (
+        <>
+          <TextField
+            name="senha"
+            label="Senha"
+            type="password"
+            value={senha.senha}
+            onChange={handlePasswordChange}
+            error={error.senha}
+            required
+            fullWidth
+          />
+          <TextField
+            name="confirmacaoSenha"
+            label="Confirme sua Senha"
+            type="password"
+            value={senha.confirmacaoSenha}
+            onChange={handlePasswordChange}
+            error={error.senha}
+            helperText={error.senha ? 'As senhas informadas devem ser iguais!' : ''}
+            required
+            fullWidth
+          />
+        </>
+      )}
     </>
   );
 };

@@ -61,6 +61,9 @@ const LoginPage = ({ user, setJwt }) => {
           <Button type="submit" variant="contained" color="primary" fullWidth>
             Login
           </Button>
+          <Button color="primary" href="/cliente/cadastro">
+            Ainda não possui cadastro?
+          </Button>
         </div>
       </form>
     </main>

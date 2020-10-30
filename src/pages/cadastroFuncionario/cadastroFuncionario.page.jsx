@@ -78,7 +78,7 @@ const CadastroFuncionario = () => {
 
   // valida o campo email
   useEffect(() => {
-    const { email } = formData;
+    const email = formData.email;
     const emailRegex = /\S+@\S+\.[a-z]+/;
 
     if (email.trim() === '' || emailRegex.test(email)) {
@@ -90,7 +90,7 @@ const CadastroFuncionario = () => {
 
   // valida se o campo cpf tem 11 caracteres numericos
   useEffect(() => {
-    const { cpf } = formData;
+    const cpf = formData.cpf;
     if ((cpf.length === 11 || cpf.trim() === '') && !/[^1-9]/.test(cpf)) {
       setError((state) => ({ ...state, cpf: false }));
     } else {
@@ -100,7 +100,7 @@ const CadastroFuncionario = () => {
 
   // valida se o campo nome não possui numeros e tem mais de 5 caracteres
   useEffect(() => {
-    const { nome } = formData;
+    const nome = formData.nome;
     if ((nome.length >= 5 || nome.trim() === '') && !/[0-9]/.test(nome)) {
       setError((state) => ({ ...state, nome: false }));
     } else {

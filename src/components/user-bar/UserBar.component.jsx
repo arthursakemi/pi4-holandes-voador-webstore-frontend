@@ -29,6 +29,10 @@ const UserBar = ({ user, handleLogOut }) => {
     history.push('/backoffice/senha');
   };
 
+  function redirectToEditUser() {
+    history.push(`/cliente/editar/${user.id}`);
+  }
+
   return (
     <div className="user-bar">
       {user.nome ? (
@@ -62,6 +66,7 @@ const UserBar = ({ user, handleLogOut }) => {
       )}
       <Menu anchorEl={anchor} open={Boolean(anchor)} onClose={handleClose} keepMounted>
         <MenuItem onClick={redirectToPasswordChange}>Alterar Senha</MenuItem>
+        {user.cargo === 'cliente' ? <MenuItem onClick={redirectToEditUser}>Alterar Dados</MenuItem> : ''}
       </Menu>
     </div>
   );

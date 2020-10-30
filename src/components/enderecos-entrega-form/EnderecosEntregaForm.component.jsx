@@ -21,7 +21,7 @@ const initialError = {
   numero: false,
 };
 
-const EnderecosEntregaForm = ({ formData, setFormData }) => {
+const EnderecosEntregaForm = ({ formData, setFormData, edicao }) => {
   const [endereco, setEndereco] = useState(initialAddress);
   const [enderecosCadastrados, setEnderecosCadastrados] = useState(formData.enderecosEntrega);
   const [isSameAddress, setIsSameAddress] = useState(false);
@@ -161,18 +161,46 @@ const EnderecosEntregaForm = ({ formData, setFormData }) => {
     if (error.cep) {
       return;
     }
+    if (edicao) {
+      postAddress(formData.id, endereco);
+    }
     setEnderecosCadastrados((state) => [...state, endereco]);
     setEndereco(initialAddress);
     setIsFormVisible(false);
     setError(initialError);
   };
 
+  const postAddress = (idCliente, endereco) => {
+    const url = `https://dutchman-backend-prod.herokuapp.com/endereco/${idCliente}`;
+
+    Axios.post(url, endereco)
+      .then((res) => {
+        console.log(res.data);
+        getCurrentClient();
+      })
+      .catch((e) => console.log(e));
+  };
+
+  const getCurrentClient = () => {
+    const url = `https://dutchman-backend-prod.herokuapp.com/cliente/${formData.id}`;
+
+    Axios.get(url)
+      .then((res) => {
+        setFormData(res.data);
+      })
+      .catch((e) => console.log(e));
+  };
+
   return (
     <>
-      <FormControlLabel
-        control={<Checkbox checked={isSameAddress} onChange={() => setIsSameAddress((state) => !state)} color="primary" />}
-        label="Usar o endereço de faturamento."
-      />
+      {edicao ? (
+        ''
+      ) : (
+        <FormControlLabel
+          control={<Checkbox checked={isSameAddress} onChange={() => setIsSameAddress((state) => !state)} color="primary" />}
+          label="Usar o endereço de faturamento."
+        />
+      )}
       {isFormVisible ? (
         getAddressForm()
       ) : (
@@ -180,7 +208,12 @@ const EnderecosEntregaForm = ({ formData, setFormData }) => {
           Adicionar Novo Endereço
         </Button>
       )}
-      <GaleriaEnderecos enderecos={enderecosCadastrados} setEnderecos={setEnderecosCadastrados}></GaleriaEnderecos>
+      <GaleriaEnderecos
+        enderecos={enderecosCadastrados}
+        setEnderecos={setEnderecosCadastrados}
+        edicao={edicao}
+        getCurrentClient={getCurrentClient}
+      ></GaleriaEnderecos>
     </>
   );
 };
