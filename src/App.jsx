@@ -45,7 +45,7 @@ function App() {
 
   return (
     <div className="App">
-      <UserBar user={user} handleLogOut={handleLogOut} />
+      <UserBar user={user} handleLogOut={handleLogOut} cart={[1, 1, 1, 1, 1, 1, 1]} setCart={''} />
       <Header />
       <Switch>
         <Route exact path="/produtos/cadastro" render={(props) => <CadastroProduto {...appProps} {...props} />} />
