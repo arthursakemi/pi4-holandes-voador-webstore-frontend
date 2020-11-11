@@ -6,6 +6,8 @@ import './userBar.styles.scss';
 import { Button, Menu, MenuItem, Badge, Popover, IconButton } from '@material-ui/core';
 import { ShoppingCartOutlined } from '@material-ui/icons';
 
+import CartPopover from '../../components/cart-popover/CartPopover.component';
+
 const UserBar = ({ user, handleLogOut, cart, setCart }) => {
   const [menuAnchor, setMenuAnchor] = useState(null);
   const [cartAnchor, setCartAnchor] = useState(null);
@@ -52,32 +54,32 @@ const UserBar = ({ user, handleLogOut, cart, setCart }) => {
   };
 
   return (
-    <>
-      <div className="user-bar">
-        {isEmployee ? (
-          <Button className="backoffice-button" type="button" onClick={redirectToUserList} variant="outlined" color="inherit" size="small">
-            BackOffice
-          </Button>
-        ) : (
-          <div />
-        )}
+    <div className="user-bar">
+      {isEmployee ? (
+        <Button className="backoffice-button" type="button" onClick={redirectToUserList} variant="outlined" color="inherit" size="small">
+          BackOffice
+        </Button>
+      ) : (
         <div />
+      )}
+      <div />
+      {user.cargo === 'cliente' || user.cargo === '' ? (
         <Badge className="cart-icon" badgeContent={cart.length} color="secondary">
           <ShoppingCartOutlined onClick={handleCartClick} />
         </Badge>
-        {user.nome ? (
-          <>
-            <Button type="button" onClick={handleLogOut} color="inherit" size="small">
-              Logout
-            </Button>
-            <span onClick={handleNameClick}>{getName()}</span>
-          </>
-        ) : (
-          <Button type="button" onClick={handleLoginClick} variant="outlined" color="inherit" size="small">
-            Login
+      ) : null}
+      {user.nome ? (
+        <>
+          <Button type="button" onClick={handleLogOut} color="inherit" size="small">
+            Logout
           </Button>
-        )}
-      </div>
+          <span onClick={handleNameClick}>{getName()}</span>
+        </>
+      ) : (
+        <Button type="button" onClick={handleLoginClick} variant="outlined" color="inherit" size="small">
+          Login
+        </Button>
+      )}
       <Menu anchorEl={menuAnchor} open={Boolean(menuAnchor)} onClose={handleCloseMenu} keepMounted>
         <MenuItem onClick={redirectToPasswordChange}>Alterar Senha</MenuItem>
         {user.cargo === 'cliente' ? <MenuItem onClick={redirectToEditUser}>Alterar Dados</MenuItem> : ''}
@@ -95,9 +97,9 @@ const UserBar = ({ user, handleLogOut, cart, setCart }) => {
           horizontal: 'center',
         }}
       >
-        The content of the Popover.
+        <CartPopover cartItems={cart} />
       </Popover>
-    </>
+    </div>
   );
 };
 
