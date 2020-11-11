@@ -19,12 +19,14 @@ import ListaFuncionario from './pages/listaFuncionario/ListaFuncionario.page';
 import EdicaoFuncionario from './pages/edicaoFuncionario/EdicaoFuncionario.page';
 import CadastroCliente from './pages/cadastroCliente/cadastroCliente.page';
 import EdicaoCliente from './pages/edicaoCliente/edicaoCliente.page';
+import Checkout from './pages/checkoutPage/Checkout.page';
 
 const initialUser = { id: '', nome: '', email: '', cpf: '', cargo: '' };
 
 function App() {
   const [jwt, setJwt] = useState(sessionStorage.getItem('jwtToken'));
   const [user, setUser] = useState(initialUser);
+  const [cart, setCart] = useState([]);
 
   const handleLogOut = (e) => {
     e.preventDefault();
@@ -32,6 +34,15 @@ function App() {
     setJwt(null);
     setUser(initialUser);
   };
+
+  useEffect(() => {
+    const storedCart = localStorage.getItem('cart');
+    setCart(storedCart ? JSON.parse(storedCart) : []);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
   useEffect(() => {
     try {
@@ -45,11 +56,11 @@ function App() {
 
   return (
     <div className="App">
-      <UserBar user={user} handleLogOut={handleLogOut} cart={[1, 1, 1, 1, 1, 1, 1]} setCart={''} />
+      <UserBar user={user} handleLogOut={handleLogOut} cart={cart} setCart={setCart} />
       <Header />
       <Switch>
         <Route exact path="/produtos/cadastro" render={(props) => <CadastroProduto {...appProps} {...props} />} />
-        <Route exact path="/produtos/:id" render={(props) => <DetalheProduto {...appProps} {...props} />} />
+        <Route exact path="/produtos/:id" render={(props) => <DetalheProduto cart={cart} setCart={setCart} {...appProps} {...props} />} />
         <Route exact path="/produtos/editar/:id" render={(props) => <EdicaoProduto {...appProps} {...props} />} />
         <Route exact path="/produtos/categoria/:categoria" render={(props) => <GaleriaProdutos {...appProps} {...props} />} />
         <Route path="/produtos" render={(props) => <GaleriaProdutos {...appProps} {...props} />} />
@@ -60,6 +71,7 @@ function App() {
         <Route exact path="/backoffice/funcionarios" render={(props) => <ListaFuncionario {...appProps} {...props} />} />
         <Route exact path="/backoffice/funcionarios/:id" render={(props) => <EdicaoFuncionario {...appProps} {...props} />} />
         <Route exact path="/backoffice/senha" render={(props) => <AlterarSenha {...appProps} {...props} />} />
+        <Route exact path="/carrinho" render={(props) => <Checkout cart={cart} {...appProps} {...props} />} />
 
         <Route path="/" component={HomePage} />
       </Switch>
