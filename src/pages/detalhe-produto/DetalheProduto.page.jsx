@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import './detalheProduto.style.scss';
 
@@ -28,6 +28,7 @@ const DetalheProduto = ({ cart, setCart, user }) => {
   const [produto, setProduto] = useState(initialDataState);
   const [tamanho, setTamanho] = useState('');
   const [erro, setErro] = useState(false);
+  const history = useHistory();
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -36,8 +37,6 @@ const DetalheProduto = ({ cart, setCart, user }) => {
       return;
     }
     const index = cart.findIndex((item) => item.idProduto === id && item.tamanho === tamanho);
-
-    console.log(index);
     if (index === -1) {
       setCart((state) => [
         ...state,
@@ -48,6 +47,7 @@ const DetalheProduto = ({ cart, setCart, user }) => {
       currentCart[index].quantidade += 1;
       setCart(currentCart);
     }
+    history.push('/carrinho');
   };
 
   const handleChange = (e) => {
