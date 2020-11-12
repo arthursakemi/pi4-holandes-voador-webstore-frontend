@@ -5,8 +5,7 @@ import { useState } from 'react';
 
 import './cartPopover.styles.scss';
 
-import { CardMedia, IconButton } from '@material-ui/core';
-import { CancelOutlined } from '@material-ui/icons';
+import { CardMedia } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
 const CarrinhoVazio = () => <div className="carrinho-vazio">Carrinho Vazio</div>;
@@ -27,11 +26,10 @@ const CartItem = ({ produto, removeItem, hover }) => {
 
 const CartPopover = ({ cartItems, removeItem }) => {
   const [total, setTotal] = useState(0);
-  const [over, setOver] = useState(-1);
   const history = useHistory();
 
   const handleClick = () => {
-    history.push('/checkout');
+    history.push('/carrinho');
   };
 
   useEffect(() => {
