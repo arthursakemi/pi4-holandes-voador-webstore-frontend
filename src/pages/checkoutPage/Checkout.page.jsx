@@ -1,61 +1,37 @@
-import { CardMedia } from '@material-ui/core';
 import React, { useState } from 'react';
-import { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import './checkout.styles.scss';
 
-import { Button } from '@material-ui/core';
+import { Stepper, Step, StepLabel, Button } from '@material-ui/core';
 
-const CartItem = ({ item }) => {
-  const { idProduto, nome, imagem, tamanho, quantidade, preco } = item;
-  return (
-    <div className="cart-item">
-      <CardMedia className="cart-img" image={imagem.imagem} />
-      <div className="cart-text">
-        <h2 className="cart-product-name">{nome}</h2>
-        <h2>{quantidade}</h2>
-        <h3 className="cart-product-price">{`R$ ${preco.toFixed(2)}`}</h3>
-      </div>
-    </div>
-  );
-};
+const CheckoutPage = ({ cart }) => {
+  const [passo, setPasso] = useState(0);
+  const steps = ['Endereço de Envio', 'Método de Pagamento', 'Fechar Compra'];
 
-const Checkout = ({ user, cart }) => {
-  const [total, setTotal] = useState(0);
-  const [frete, setFrete] = useState(0);
-  const history = useHistory();
-
-  useEffect(() => {
-    const newTotal = cart.reduce((total, item) => total + item.preco * item.quantidade, 0);
-    setTotal(newTotal);
-  }, [cart]);
-
+  const getStepPage = (step) => {
+    switch (step) {
+      case 0:
+        return '<ClientForm {...formProps} />';
+      case 1:
+        return '<EnderecoFaturamentoForm {...formProps} />';
+      case 2:
+        return '<EnderecosEntregaForm {...formProps} />';
+      default:
+        return;
+    }
+  };
   return (
     <main className="checkout-page">
-      <h1 className="form-title">Carrinho</h1>
-      <div className="cart-container">
-        {cart.map((item, index) => (
-          <CartItem key={index} item={item} />
+      <Stepper activeStep={passo} alternativeLabel>
+        {steps.map((step) => (
+          <Step key={step}>
+            <StepLabel>{step}</StepLabel>
+          </Step>
         ))}
-      </div>
-      <div class="cart-label">
-        <h3>Total :</h3>
-        <h3 id="total">{`R$ ${total.toFixed(2)}`}</h3>
-      </div>
-      <Button type="button" onClick={() => history.push('/produtos')} color="primary">
-        Continuar Comprando
-      </Button>
-      <div class="form-group">
-        <Button type="button" variant="contained" onClick={'handleCancelCadastro'} fullWidth>
-          esvaziar carrinho
-        </Button>
-        <Button type="submit" variant="contained" color="primary" fullWidth>
-          fechar pedido
-        </Button>
-      </div>
+      </Stepper>
+      {getStepPage(passo)}
     </main>
   );
 };
 
-export default Checkout;
+export default CheckoutPage;
