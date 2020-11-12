@@ -8,9 +8,8 @@ import './carrinho.styles.scss';
 import { Button } from '@material-ui/core';
 import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
 
-const Carrinho = ({ user, cart, setCart }) => {
+const Carrinho = ({ cart, setCart }) => {
   const [total, setTotal] = useState(0);
-  const [frete, setFrete] = useState(0);
   const history = useHistory();
 
   const incrementQuantity = (e) => {
@@ -67,14 +66,14 @@ const Carrinho = ({ user, cart, setCart }) => {
           <CartItem key={index} item={item} itemIndex={index} />
         ))}
       </div>
-      <div class="cart-label">
+      <div className="cart-label">
         <h3>Total :</h3>
         <h3 id="total">{`R$ ${total.toFixed(2)}`}</h3>
       </div>
       <Button type="button" onClick={() => history.push('/')} color="primary">
         Continuar Comprando
       </Button>
-      <div class="form-group">
+      <div className="form-group">
         <Button type="button" variant="contained" onClick={() => setCart([])} fullWidth>
           esvaziar carrinho
         </Button>
