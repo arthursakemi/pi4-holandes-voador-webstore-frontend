@@ -68,6 +68,12 @@ const CheckoutPage = ({ cart, setCart, user }) => {
     setSelectedAddress(id);
   };
 
+  useEffect(() => {
+    if (user.cargo !== 'cliente') {
+      history.push('/login');
+    }
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (passo < 2) {
