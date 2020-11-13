@@ -35,29 +35,27 @@ const GaleriaEnderecos = ({ enderecos, setEnderecos, edicao, getCurrentClient })
   return (
     <div className="galeria-enderecos">
       {enderecos.map((endereco, index) => (
-        <>
-          <div key={index} className="card-endereco">
-            <div className="endereco-container">
-              <span>{endereco.cep}</span>
-              <span>{`${endereco.endereco}, ${endereco.numero}`}</span>
-              <span>{endereco.complemento}</span>
-              <span>{endereco.bairro}</span>
-              <span>{`${endereco.cidade} - ${endereco.uf}`}</span>
-            </div>
-            <div className="flex-box">
-              <IconButton
-                className="faq-add-btn"
-                data-index={index}
-                data-id={endereco.id}
-                type="button"
-                color="secondary"
-                onClick={handleRemove}
-              >
-                <CancelOutlined />
-              </IconButton>
-            </div>
+        <div key={index} className="card-endereco">
+          <div className="endereco-container">
+            <span>{endereco.cep}</span>
+            <span>{`${endereco.endereco}, ${endereco.numero}`}</span>
+            <span>{endereco.complemento}</span>
+            <span>{endereco.bairro}</span>
+            <span>{`${endereco.cidade} - ${endereco.uf}`}</span>
           </div>
-        </>
+          <div className="flex-box">
+            <IconButton
+              className="faq-add-btn"
+              data-index={index}
+              data-id={endereco.id}
+              type="button"
+              color="secondary"
+              onClick={handleRemove}
+            >
+              <CancelOutlined />
+            </IconButton>
+          </div>
+        </div>
       ))}
     </div>
   );

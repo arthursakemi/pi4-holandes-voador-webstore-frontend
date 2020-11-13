@@ -1,0 +1,13 @@
+.box-endereco {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.total {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
