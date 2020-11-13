@@ -38,3 +38,10 @@ const cart = [
     preco: 199.0,
   },
 ];
+
+const Cartao = {
+  parcelas: '0',
+  numeroCartao: '',
+  vencimento: '',
+  codigo: '',
+};

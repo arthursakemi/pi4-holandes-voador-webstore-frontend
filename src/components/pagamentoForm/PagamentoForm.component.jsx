@@ -20,7 +20,8 @@ const PagamentoForm = ({ pedido, setPedido, cartao, setCartao }) => {
   };
 
   useEffect(() => {
-    setPedido((state) => ({ ...state, pagamento: pagamento }));
+    const formaPagamento = pagamento === 'boleto' ? pagamento : `${pagamento} ${cartao.parcelas}`;
+    setPedido((state) => ({ ...state, pagamento: formaPagamento }));
   }, [pagamento]);
 
   return (

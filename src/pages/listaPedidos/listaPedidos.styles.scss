@@ -1,0 +1,55 @@
+.lista-pedidos-page {
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 25px;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pedido {
+  padding: 10px 20px;
+  display: grid;
+  grid-template-columns: 50px repeat(auto-fit, minmax(100px, 1fr));
+  align-items: center;
+  text-align: center;
+}
+
+.pedido-modal {
+  margin: 20px auto;
+  max-width: 500px;
+  border-radius: 10px;
+  overflow: auto;
+}
+
+.modal-paper {
+  padding: 10px 20px;
+
+  .form-group {
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.modal-button {
+  justify-content: space-between;
+}
+
+.card {
+  margin: 5px 0;
+}
+
+@media screen and (max-width: 450px) {
+  .pedido {
+    grid-template-columns: 50px 1fr 1fr;
+    grid-template-areas:
+      'dados dados dados'
+      'status status status';
+  }
+
+  .status {
+    grid-area: status;
+  }
+}

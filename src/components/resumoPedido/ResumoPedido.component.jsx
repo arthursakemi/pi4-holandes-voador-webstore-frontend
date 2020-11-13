@@ -1,5 +1,6 @@
 import { Paper, Typography } from '@material-ui/core';
 import React from 'react';
+import { useState } from 'react';
 
 import './resumoPedido.styles.scss';
 
@@ -15,6 +16,7 @@ const Item = ({ item }) => (
     </div>
   </div>
 );
+
 const ResumoPedido = ({ pedido, cart, cartao }) => {
   return (
     <>
@@ -24,7 +26,7 @@ const ResumoPedido = ({ pedido, cart, cartao }) => {
         ))}
       </Paper>
       <Paper className="resumo">
-        <Typography variant="subtitle1">{`Método de Pagamento: ${pedido.pagamento}`}</Typography>
+        <Typography variant="subtitle1">{`Método de Pagamento: ${pedido.pagamento.split(' ')[0]}`}</Typography>
         {pedido.pagamento === 'cartão' ? (
           <>
             <Typography>{`Número: ${cartao.numeroCartao}`}</Typography>

@@ -45,6 +45,10 @@ const UserBar = ({ user, handleLogOut, cart, setCart }) => {
     history.push(`/cliente/editar/${user.id}`);
   }
 
+  function redirectToCompras() {
+    history.push(`/compras/${user.id}`);
+  }
+
   const isEmployee = user.cargo === 'admin' || user.cargo === 'estoquista';
 
   const getName = () => {
@@ -82,7 +86,9 @@ const UserBar = ({ user, handleLogOut, cart, setCart }) => {
       )}
       <Menu anchorEl={menuAnchor} open={Boolean(menuAnchor)} onClose={handleCloseMenu} keepMounted>
         <MenuItem onClick={redirectToPasswordChange}>Alterar Senha</MenuItem>
-        {user.cargo === 'cliente' ? <MenuItem onClick={redirectToEditUser}>Alterar Dados</MenuItem> : ''}
+        {user.cargo === 'cliente'
+          ? [<MenuItem onClick={redirectToEditUser}>Alterar Dados</MenuItem>, <MenuItem onClick={redirectToCompras}>Meus Pedidos</MenuItem>]
+          : null}
       </Menu>
       <Popover
         open={Boolean(cartAnchor)}

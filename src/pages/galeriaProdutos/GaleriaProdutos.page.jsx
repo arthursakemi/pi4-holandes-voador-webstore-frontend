@@ -4,7 +4,7 @@ import Axios from 'axios';
 
 import './galeriaProdutos.styles.scss';
 
-import { Card, CardActionArea, IconButton, Switch } from '@material-ui/core';
+import { Card, CardActionArea, IconButton } from '@material-ui/core';
 
 import DoneOverlay from '../../components/done-overlay/DoneOverlay.component';
 import LoadingOverlay from '../../components/loading-overlay/LoadingOverlay.component';
