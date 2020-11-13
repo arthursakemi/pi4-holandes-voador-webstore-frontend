@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import './listaPedidos.styles.scss';
 
@@ -69,11 +69,12 @@ const ProdutoCompra = ({ produto, tamanho, quantidade }) => {
   );
 };
 
-const ListaPedidosPage = () => {
+const ListaPedidosPage = ({ user }) => {
   const userId = useParams().id;
   const [pedidos, setPedidos] = useState([]);
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(0);
+  const history = useHistory();
 
   const handleClose = () => setOpen(false);
 
@@ -82,6 +83,12 @@ const ListaPedidosPage = () => {
     setSelected(id);
     setOpen(true);
   };
+
+  useEffect(() => {
+    if (user.cargo !== 'cliente') {
+      history.push('/login');
+    }
+  });
 
   useEffect(() => {
     const url = `https://dutchman-backend-prod.herokuapp.com/venda/${userId}`;
