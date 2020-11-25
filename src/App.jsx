@@ -22,6 +22,7 @@ import EdicaoCliente from './pages/edicaoCliente/edicaoCliente.page';
 import Carrinho from './pages/carrinhoPage/Carrinho.page';
 import CheckoutPage from './pages/checkoutPage/Checkout.page';
 import ListaPedidosPage from './pages/listaPedidos/ListaPedidos.page';
+import PedidosBackoffice from './pages/pedidosBackoffice/PedidosBackoffice.page';
 
 const initialUser = { id: 0, nome: '', email: '', cpf: '', cargo: '' };
 
@@ -73,6 +74,7 @@ function App() {
         <Route exact path="/backoffice/funcionarios" render={(props) => <ListaFuncionario {...appProps} {...props} />} />
         <Route exact path="/backoffice/funcionarios/:id" render={(props) => <EdicaoFuncionario {...appProps} {...props} />} />
         <Route exact path="/backoffice/senha" render={(props) => <AlterarSenha {...appProps} {...props} />} />
+        <Route exact path="/backoffice/vendas" render={(props) => <PedidosBackoffice {...appProps} {...props} />} />
         <Route exact path="/carrinho" render={(props) => <Carrinho cart={cart} setCart={setCart} {...appProps} {...props} />} />
         <Route exact path="/checkout" render={(props) => <CheckoutPage cart={cart} setCart={setCart} {...appProps} {...props} />} />
         <Route exact path="/compras/:id" render={(props) => <ListaPedidosPage {...appProps} {...props} />} />

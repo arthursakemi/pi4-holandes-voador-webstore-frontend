@@ -11,6 +11,7 @@ import CartPopover from '../../components/cart-popover/CartPopover.component';
 const UserBar = ({ user, handleLogOut, cart, setCart }) => {
   const [menuAnchor, setMenuAnchor] = useState(null);
   const [cartAnchor, setCartAnchor] = useState(null);
+  const [backofficeAnchor, setBackofficeAnchor] = useState(null);
   const history = useHistory();
 
   const handleNameClick = (e) => {
@@ -29,16 +30,26 @@ const UserBar = ({ user, handleLogOut, cart, setCart }) => {
     setCartAnchor(null);
   };
 
+  const handleBackofficeClick = (e) => {
+    setBackofficeAnchor(e.currentTarget);
+  };
+
+  const handleBackofficeClose = (e) => {
+    setBackofficeAnchor(null);
+  };
+
   const handleLoginClick = () => {
     history.push('/login');
   };
 
   const redirectToUserList = () => {
     history.push('/backoffice/funcionarios');
+    setBackofficeAnchor(null);
   };
 
   const redirectToPasswordChange = () => {
     history.push('/backoffice/senha');
+    setMenuAnchor(null);
   };
 
   function redirectToEditUser() {
@@ -47,6 +58,11 @@ const UserBar = ({ user, handleLogOut, cart, setCart }) => {
 
   function redirectToCompras() {
     history.push(`/compras/${user.id}`);
+  }
+
+  function redirectToVendas() {
+    history.push('/backoffice/vendas');
+    setBackofficeAnchor(null);
   }
 
   const isEmployee = user.cargo === 'admin' || user.cargo === 'estoquista';
@@ -60,7 +76,7 @@ const UserBar = ({ user, handleLogOut, cart, setCart }) => {
   return (
     <div className="user-bar">
       {isEmployee ? (
-        <Button className="backoffice-button" type="button" onClick={redirectToUserList} variant="outlined" color="inherit" size="small">
+        <Button className="backoffice-button" type="button" onClick={handleBackofficeClick} variant="outlined" color="inherit" size="small">
           BackOffice
         </Button>
       ) : (
@@ -89,6 +105,10 @@ const UserBar = ({ user, handleLogOut, cart, setCart }) => {
         {user.cargo === 'cliente'
           ? [<MenuItem onClick={redirectToEditUser}>Alterar Dados</MenuItem>, <MenuItem onClick={redirectToCompras}>Meus Pedidos</MenuItem>]
           : null}
+      </Menu>
+      <Menu anchorEl={backofficeAnchor} open={Boolean(backofficeAnchor)} onClose={handleBackofficeClose}>
+        <MenuItem onClick={redirectToUserList}>Funcionarios</MenuItem>
+        <MenuItem onClick={redirectToVendas}>Vendas</MenuItem>
       </Menu>
       <Popover
         open={Boolean(cartAnchor)}
