@@ -126,7 +126,8 @@ const CheckoutPage = ({ cart, setCart, user }) => {
 
   useEffect(() => {
     if (cliente.enderecosEntrega.length < 1) return;
-    setPedido((state) => ({ ...state, enderecoEntrega: { id: cliente.enderecosEntrega[selectedAddress].id } }));
+    const enderecoEntrega = cliente.enderecosEntrega[selectedAddress];
+    setPedido((state) => ({ ...state, enderecoEntrega }));
   }, [selectedAddress]);
 
   useEffect(() => {
