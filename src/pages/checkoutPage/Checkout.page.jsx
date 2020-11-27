@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import Axios from 'axios';
 
 import AddressBox from '../../components/addressBox/AddressBox.component';
+import Alert from '../../components/alert/Alert.component';
 
 import { Stepper, Step, StepLabel, Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
@@ -59,6 +60,9 @@ const CheckoutPage = ({ cart, setCart, user }) => {
   const [cliente, setCliente] = useState(initialUser);
   const [selectedAddress, setSelectedAddress] = useState(0);
   const [cartao, setCartao] = useState(Cartao);
+  const [showAlert, setShowAlert] = useState(false);
+  const [idPedido, setIdPedido] = useState(0);
+  const [idCliente, setIdCliente] = useState(-1);
   const history = useHistory();
 
   const steps = ['Endereço de Envio', 'Método de Pagamento', 'Fechar Compra'];
@@ -74,6 +78,10 @@ const CheckoutPage = ({ cart, setCart, user }) => {
     }
   });
 
+  const handleCloseAlert = () => {
+    setShowAlert(false);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (passo < 2) {
@@ -86,8 +94,10 @@ const CheckoutPage = ({ cart, setCart, user }) => {
       .then((res) => {
         console.log(res);
         setCart([]);
+        setIdPedido(res.data.id);
+        setIdCliente(res.data.cliente.id);
+        setShowAlert(true);
       })
-      .then(() => history.push('/'))
       .catch((e) => console.log(e));
   };
 
@@ -197,6 +207,15 @@ const CheckoutPage = ({ cart, setCart, user }) => {
           {passo === 2 ? 'Fechar Pedido' : 'Avançar'}
         </Button>
       </div>
+      <Alert
+        open={showAlert}
+        handleClose={handleCloseAlert}
+        handleConfirm={() => {
+          history.push(`/compras/${idCliente}`);
+        }}
+        title="Pedido criado com sucesso!"
+        text={`Pedido #${idPedido} criado com sucesso!`}
+      />
     </main>
   );
 };
